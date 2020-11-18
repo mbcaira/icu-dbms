@@ -15,6 +15,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }
+    //TODO: Call OracleDB connection on startup before given access to SQL functions
 
 
     public static void main(String[] args) {
