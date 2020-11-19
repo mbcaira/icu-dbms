@@ -25,14 +25,18 @@ public class DropTables {
             "DROP VIEW high_cost_surgeries",
             "DROP VIEW new_pharmacists"
     };
-    public DropTables(){
+    public String drop(){
+        String out = "";
         for (String command : dropCommands) {
             try {
                 conn.execute(command);
                 System.out.println("Executed: "+command);
+                out += "Executed: "+command+"\n";
             } catch (Exception e) {
                 System.out.println("Failed to execute: "+command);
+                out += "Failed to execute: "+command+"\n";
             }
         }
+        return out+"\nTables dropped.";
     }
 }

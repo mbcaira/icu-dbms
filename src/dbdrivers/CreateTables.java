@@ -14,13 +14,13 @@ public class CreateTables {
                     "    medical_id INT PRIMARY KEY,\n" +
                     "    first_name VARCHAR2(20) NOT NULL,\n" +
                     "    last_name VARCHAR2(20) NOT NULL,\n" +
-                    "    specialty VARCHAR2(20) /*Specialty can be null to account for interns (first-year physicians) */\n" +
+                    "    specialty VARCHAR2(20)\n" +
                     ")"),
             ("CREATE TABLE nurse(\n" +
                     "    medical_id INT PRIMARY KEY,\n" +
                     "    first_name VARCHAR2(20) NOT NULL,\n" +
                     "    last_name VARCHAR2(20) NOT NULL,\n" +
-                    "    specialization VARCHAR2(20) /*a nurse does not necessarily need to have a specialization (e.g. scrub nurse, ER nurse, etc) */\n" +
+                    "    specialization VARCHAR2(20)\n" +
                     ")"),
             ("CREATE TABLE pharmacist(\n" +
                     "    pharmacist_id INT PRIMARY KEY,\n" +
@@ -33,7 +33,7 @@ public class CreateTables {
                     ")"),
             ("CREATE TABLE operating_room(\n" +
                     "    room_number INT PRIMARY KEY,\n" +
-                    "    speciality VARCHAR2 (30) --Different operating rooms are used for different surgeries\n" +
+                    "    speciality VARCHAR2 (30)\n" +
                     ")"),
             ("CREATE TABLE writes_prescription(\n" +
                     "    physician_id INT NOT NULL,\n" +
@@ -55,9 +55,9 @@ public class CreateTables {
                     "    admin_id INT NOT NULL,\n" +
                     "    FOREIGN KEY(physician_id) REFERENCES physician(medical_id) ON DELETE SET NULL,\n" +
                     "    FOREIGN KEY(nurse_id) REFERENCES nurse(medical_id) ON DELETE SET NULL,\n" +
-                    "    FOREIGN KEY(admin_id) REFERENCES administrator(admin_id) ON DELETE SET NULL, --admits/discharges relationship\n" +
-                    "    FOREIGN KEY(pharmacist_id) REFERENCES pharmacist(pharmacist_id) ON DELETE SET NULL, --fills prescription relationship\n" +
-                    "    FOREIGN KEY(room_number) REFERENCES patient(room_number) ON DELETE SET NULL -- Occupies relationship\n" +
+                    "    FOREIGN KEY(admin_id) REFERENCES administrator(admin_id) ON DELETE SET NULL,\n" +
+                    "    FOREIGN KEY(pharmacist_id) REFERENCES pharmacist(pharmacist_id) ON DELETE SET NULL,\n" +
+                    "    FOREIGN KEY(room_number) REFERENCES patient(room_number) ON DELETE SET NULL\n" +
                     ")"),
             ("CREATE TABLE medical_bill(\n" +
                     "    patient_id INT NOT NULL UNIQUE,\n" +
@@ -88,8 +88,8 @@ public class CreateTables {
                     "    patient_id INT NOT NULL,\n" +
                     "    operation_id INT NOT NULL,\n" +
                     "    operation_type VARCHAR2(20) NOT NULL,\n" +
-                    "    operating_room INT, -- uses relationship\n" +
-                    "    medical_bill INT, -- adds_to relationship\n" +
+                    "    operating_room INT,\n" +
+                    "    medical_bill INT,\n" +
                     "    PRIMARY KEY(patient_id,operation_id),\n" +
                     "    FOREIGN KEY(operating_room) REFERENCES operating_room(room_number) ON DELETE SET NULL,\n" +
                     "    FOREIGN KEY (patient_id,medical_bill) REFERENCES medical_bill(patient_id,bill_id),\n" +
@@ -129,14 +129,18 @@ public class CreateTables {
                     "    FOREIGN KEY (pharmacist_id) REFERENCES pharmacist(pharmacist_id)\n" +
                     ")")
     };
-    public CreateTables(){
+    public String create(){
+        String out = "";
         for (String command : createCommands) {
             try {
                 conn.execute(command);
-                System.out.println("Executed: " + command);
+                System.out.println("Executed: "+command);
+                out += "Executed: "+command+"\n";
             } catch (Exception e) {
-                System.out.println("Failed to execute: " + command);
+                System.out.println("Failed to execute: "+command);
+                out += "Failed to execute: "+command+"\n";
             }
         }
+        return out+"\nTables created.";
     }
 }
