@@ -27,6 +27,7 @@ public class DropTables {
     };
     public String drop(){
         String out = "";
+        Statement conn = OracleCon.connectDB();
         for (String command : dropCommands) {
             try {
                 conn.execute(command);
@@ -38,5 +39,10 @@ public class DropTables {
             }
         }
         return out+"\nTables dropped.";
+    }
+
+    public static void main(String[] args) {
+        DropTables t = new DropTables();
+        t.drop();
     }
 }

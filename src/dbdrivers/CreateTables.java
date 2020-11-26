@@ -131,6 +131,7 @@ public class CreateTables {
     };
     public String create(){
         String out = "";
+        Statement conn = OracleCon.connectDB();
         for (String command : createCommands) {
             try {
                 conn.execute(command);
@@ -142,5 +143,10 @@ public class CreateTables {
             }
         }
         return out+"\nTables created.";
+    }
+
+    public static void main(String[] args) {
+        CreateTables t = new CreateTables();
+        t.create();
     }
 }

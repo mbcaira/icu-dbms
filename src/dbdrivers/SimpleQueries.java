@@ -1,6 +1,10 @@
 package dbdrivers;
 
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class SimpleQueries {
+    Statement conn = OracleCon.conn;
     String[] queries = {
             ("SELECT room_number, 'Performs operations of specialty ', speciality\n" +
                     "   FROM operating_room\n" +
@@ -55,8 +59,24 @@ public class SimpleQueries {
             ("SELECT name FROM hospital WHERE hospital_id = 0")
     };
 
-    public static void main(String[] args) {
+    public String queries() throws SQLException {
+        Statement conn = OracleCon.connectDB();
+        String out = "";
+        for (String command : queries) {
+            try {
+                conn.execute(command);
+                System.out.println("Executed: "+command);
+                out += "Executed: "+command+"\n";
+            } catch (Exception e) {
+                System.out.println("Failed to execute: "+command+"\n"+e);
+                out += "Failed to execute: "+command+"\n";
+            }
+        }
+        return out;
+    }
+
+    public static void main(String[] args) throws SQLException {
         SimpleQueries t = new SimpleQueries();
-        for (String s: t.queries) System.out.println(s);
+        t.queries();
     }
 }
