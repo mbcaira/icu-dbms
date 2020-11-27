@@ -4,6 +4,7 @@ import java.sql.Statement;
 
 public class DropTables {
     Statement conn = OracleCon.conn;
+    public String boxString = "";
     String[] dropCommands = {
             "DROP TABLE LOCATED_IN",
             "DROP TABLE hospital",
@@ -32,17 +33,14 @@ public class DropTables {
             try {
                 conn.execute(command);
                 System.out.println("Executed: "+command);
+                boxString += ("Executed: "+command+"\n");
                 out += "Executed: "+command+"\n";
             } catch (Exception e) {
                 System.out.println("Failed to execute: "+command);
+                boxString += ("Failed to exectute: "+command+"\n");
                 out += "Failed to execute: "+command+"\n";
             }
         }
-        return out+"\nTables dropped.";
-    }
-
-    public static void main(String[] args) {
-        DropTables t = new DropTables();
-        t.drop();
+        return out;
     }
 }

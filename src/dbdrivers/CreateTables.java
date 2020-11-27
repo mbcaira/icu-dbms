@@ -4,6 +4,7 @@ import java.sql.Statement;
 
 public class CreateTables {
     Statement conn = OracleCon.conn;
+    public String boxString = "";
     String[] createCommands = {
             ("CREATE TABLE administrator(\n" +
                     "    admin_id INT PRIMARY KEY,\n" +
@@ -136,17 +137,14 @@ public class CreateTables {
             try {
                 conn.execute(command);
                 System.out.println("Executed: "+command);
+                boxString += ("Executed: "+command);
                 out += "Executed: "+command+"\n";
             } catch (Exception e) {
                 System.out.println("Failed to execute: "+command);
+                boxString += ("Failed to execute: "+command);
                 out += "Failed to execute: "+command+"\n";
             }
         }
-        return out+"\nTables created.";
-    }
-
-    public static void main(String[] args) {
-        CreateTables t = new CreateTables();
-        t.create();
+        return out;
     }
 }

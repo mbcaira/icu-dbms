@@ -1,5 +1,7 @@
 package sample;
 
+import dbdrivers.CreateTables;
+import dbdrivers.OracleCon;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +13,7 @@ import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 
 /**
  * FXML Controller class
@@ -46,6 +49,8 @@ public class MainAppController implements Initializable {
     @FXML TextField textField9;
     @FXML TextField textField10;
 
+    OracleCon conn = new OracleCon();
+
     @FXML
     void testConnectionButton (ActionEvent event){
         // Does nothing right now, need to connect this with Michaels code
@@ -53,8 +58,7 @@ public class MainAppController implements Initializable {
     }
     @FXML
     void createTablesButton (ActionEvent event){
-        // Does nothing right now, need to connect this with Michaels code
-        // FINISH THIS BEFORE SUBMITTING
+        String c = new CreateTables().create();
     }
     @FXML
     void populateTablesButton (ActionEvent event){
