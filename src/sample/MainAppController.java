@@ -1,7 +1,9 @@
 package sample;
 
 import dbdrivers.CreateTables;
+import dbdrivers.DropTables;
 import dbdrivers.OracleCon;
+import dbdrivers.SimpleQueries;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,8 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 
 /**
  * FXML Controller class
@@ -25,6 +27,7 @@ public class MainAppController implements Initializable {
     /**
      * Initializes the controller class.
      */
+
     int currentState;
     @FXML Label label1;
     @FXML Label label2;
@@ -37,6 +40,7 @@ public class MainAppController implements Initializable {
     @FXML Label label9;
     @FXML Label label10;
     @FXML Text text = new Text();
+    @FXML Text boxText = new Text();
     @FXML ScrollPane pane;
     @FXML TextField textField1;
     @FXML TextField textField2;
@@ -48,17 +52,29 @@ public class MainAppController implements Initializable {
     @FXML TextField textField8;
     @FXML TextField textField9;
     @FXML TextField textField10;
+    String ongoingOutput = "";
+    CreateTables t = new CreateTables();
+    DropTables d = new DropTables();
 
-    OracleCon conn = new OracleCon();
+    SimpleQueries s = new SimpleQueries();
 
     @FXML
     void testConnectionButton (ActionEvent event){
         // Does nothing right now, need to connect this with Michaels code
         // FINISH THIS BEFORE SUBMITTING
+        OracleCon.connectDB();
+        ongoingOutput += OracleCon.boxString;
+        boxText.setText(ongoingOutput);
+        pane.setContent(boxText);
+        pane.setVvalue(1.0);
     }
     @FXML
     void createTablesButton (ActionEvent event){
-        String c = new CreateTables().create();
+        t.create();                                 // Creates the tables
+        ongoingOutput += t.boxString;               // Sets the text to the ScrollPane
+        boxText.setText(ongoingOutput);
+        pane.setContent(boxText);
+        pane.setVvalue(1.0);                        // Auto-scrolls to the bottom
     }
     @FXML
     void populateTablesButton (ActionEvent event){
@@ -66,9 +82,12 @@ public class MainAppController implements Initializable {
         // FINISH THIS BEFORE SUBMITTING
     }
     @FXML
-    void runSimpleButton (ActionEvent event){
-        // Does nothing right now, need to connect this with Michaels code
-        // FINISH THIS BEFORE SUBMITTING
+    void runSimpleButton (ActionEvent event) throws SQLException {
+        s.queries();                                 // Creates the tables
+        ongoingOutput += s.boxString;               // Sets the text to the ScrollPane
+        boxText.setText(ongoingOutput);
+        pane.setContent(boxText);
+        pane.setVvalue(1.0);
     }
     @FXML
     void runAdvancedButton (ActionEvent event){
@@ -77,8 +96,11 @@ public class MainAppController implements Initializable {
     }
     @FXML
     void dropTablesButton (ActionEvent event){
-        // Does nothing right now, need to connect this with Michaels code
-        // FINISH THIS BEFORE SUBMITTING
+        d.drop();                                       // Deletes the tables
+        ongoingOutput += d.boxString;                   // Sets the ScrollPane to the text
+        boxText.setText(ongoingOutput);
+        pane.setContent(boxText);
+        pane.setVvalue(1.0);                            // Auto-scrolls to the bottom
     }
     @FXML
     void addPatientButton (ActionEvent event){
@@ -351,6 +373,7 @@ public class MainAppController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+
     }
 
 

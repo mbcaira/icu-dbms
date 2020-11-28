@@ -3,10 +3,9 @@ package dbdrivers;
 import java.sql.Statement;
 
 public class DropTables {
-    Statement conn = OracleCon.conn;
     public String boxString = "";
     String[] dropCommands = {
-            "DROP TABLE LOCATED_IN",
+            "DROP TABLE located_in",
             "DROP TABLE hospital",
             "DROP TABLE assists",
             "DROP TABLE performs",
@@ -28,6 +27,7 @@ public class DropTables {
     };
     public String drop(){
         String out = "";
+        boxString = "";
         Statement conn = OracleCon.connectDB();
         for (String command : dropCommands) {
             try {

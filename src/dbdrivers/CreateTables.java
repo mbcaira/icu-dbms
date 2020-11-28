@@ -3,7 +3,6 @@ package dbdrivers;
 import java.sql.Statement;
 
 public class CreateTables {
-    Statement conn = OracleCon.conn;
     public String boxString = "";
     String[] createCommands = {
             ("CREATE TABLE administrator(\n" +
@@ -133,6 +132,7 @@ public class CreateTables {
     public String create(){
         String out = "";
         Statement conn = OracleCon.connectDB();
+        boxString = "";
         for (String command : createCommands) {
             try {
                 conn.execute(command);

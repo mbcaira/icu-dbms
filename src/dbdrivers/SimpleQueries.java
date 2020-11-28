@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SimpleQueries {
-    Statement conn = OracleCon.conn;
+    public String boxString = "";
     String[] queries;
     {
         queries = new String[]{
@@ -64,9 +64,9 @@ public class SimpleQueries {
         };
     }
 
-    public String queries() throws SQLException {
+    public void queries() throws SQLException {
         Statement conn = OracleCon.connectDB();
-        String out = "";
+        boxString = "";
         for (String command : queries) {
             try {
                 ResultSet rs = conn.executeQuery(command);
@@ -76,20 +76,14 @@ public class SimpleQueries {
                 while (rs.next()) {
                     for (int i = 1; i <= columnNumber; i++) {
                         String columnValue = rs.getString(i);
-                        out += columnValue+" "; //+ " " + rsmd.getColumnName(i)
+                        boxString += columnValue+" ";
                     }
-                    out += "\n";
+                    boxString += "\n";
                 }
             } catch (Exception e) {
                 System.out.println("Failed to execute: "+command+"\n"+e);
-                out += "Failed to execute: "+command+"\n";
+                boxString += "Failed to execute: "+command+"\n"+e;
             }
         }
-        return out;
-    }
-
-    public static void main(String[] args) throws SQLException {
-        String t = new SimpleQueries().queries();
-        System.out.println(t);
     }
 }
