@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class OracleCon {
-    private static final Statement conn = connectDB();
+    private static Statement conn;
     private static final String user = "USERNAME";
     private static final String pass = "PASSWORD";
     public static String boxString = "";
