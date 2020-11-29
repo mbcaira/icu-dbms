@@ -41,10 +41,10 @@ public class AdvancedQueries {
                 ("SELECT first_name, last_name FROM physician\n" +
                         "UNION ALL\n" +
                         "SELECT first_name, last_name FROM nurse"),
-                ("SELECT physician_id, COUNT(DISTINCT patient_id) AS Number_of_Patients FROM TREATED_BY GROUP BY physician_id"),
-                ("SELECT patient_id, COUNT(DISTINCT operation_id) AS Number_of_Operations FROM SURGERY GROUP BY patient_id"),
-                ("SELECT patient_id, COUNT(*) AS Bills_over_10k FROM MEDICAL_BILL WHERE total_cost > 10000 GROUP BY patient_id"),
-                ("SELECT first_name, last_name, AVG(prescriptions_filled) FROM pharmacist GROUP BY first_name, last_name HAVING AVG(prescriptions_filled) > (SELECT AVG(prescriptions_filled) FROM pharmacist)")
+                ("SELECT physician_id, COUNT(DISTINCT patient_id) AS Number_of_Patients FROM TREATED_BY GROUP BY physician_id\n"),
+                ("SELECT patient_id, COUNT(DISTINCT operation_id) AS Number_of_Operations FROM SURGERY GROUP BY patient_id\n"),
+                ("SELECT patient_id, COUNT(*) AS Bills_over_10k FROM MEDICAL_BILL WHERE total_cost > 10000 GROUP BY patient_id\n"),
+                ("SELECT first_name, last_name, AVG(prescriptions_filled) FROM pharmacist GROUP BY first_name, last_name HAVING AVG(prescriptions_filled) > (SELECT AVG(prescriptions_filled) FROM pharmacist)\n")
         };
     }
 
@@ -71,9 +71,5 @@ public class AdvancedQueries {
             }
         }
         System.out.println(boxString);
-    }
-    public static void main(String[] args) throws SQLException {
-        AdvancedQueries t = new AdvancedQueries();
-        t.advancedQueries();
     }
 }

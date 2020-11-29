@@ -1,9 +1,6 @@
 package sample;
 
-import dbdrivers.CreateTables;
-import dbdrivers.DropTables;
-import dbdrivers.OracleCon;
-import dbdrivers.SimpleQueries;
+import dbdrivers.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +12,7 @@ import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 /**
@@ -55,15 +53,15 @@ public class MainAppController implements Initializable {
     String ongoingOutput = "";
     CreateTables t = new CreateTables();
     DropTables d = new DropTables();
-
+    OracleCon o = new OracleCon();
     SimpleQueries s = new SimpleQueries();
+    PopulateTables p = new PopulateTables();
+    AdvancedQueries a = new AdvancedQueries();
 
     @FXML
     void testConnectionButton (ActionEvent event){
-        // Does nothing right now, need to connect this with Michaels code
-        // FINISH THIS BEFORE SUBMITTING
-        OracleCon.connectDB();
-        ongoingOutput += OracleCon.boxString;
+        o.connectDB();
+        ongoingOutput += o.boxString;
         boxText.setText(ongoingOutput);
         pane.setContent(boxText);
         pane.setVvalue(1.0);
@@ -78,8 +76,11 @@ public class MainAppController implements Initializable {
     }
     @FXML
     void populateTablesButton (ActionEvent event){
-        // Does nothing right now, need to connect this with Michaels code
-        // FINISH THIS BEFORE SUBMITTING
+        p.populate();
+        ongoingOutput += p.boxString;               // Sets the text to the ScrollPane
+        boxText.setText(ongoingOutput);
+        pane.setContent(boxText);
+        pane.setVvalue(1.0);
     }
     @FXML
     void runSimpleButton (ActionEvent event) throws SQLException {
@@ -90,9 +91,12 @@ public class MainAppController implements Initializable {
         pane.setVvalue(1.0);
     }
     @FXML
-    void runAdvancedButton (ActionEvent event){
-        // Does nothing right now, need to connect this with Michaels code
-        // FINISH THIS BEFORE SUBMITTING
+    void runAdvancedButton (ActionEvent event) throws SQLException {
+        a.advancedQueries();                                 // Creates the tables
+        ongoingOutput += a.boxString;               // Sets the text to the ScrollPane
+        boxText.setText(ongoingOutput);
+        pane.setContent(boxText);
+        pane.setVvalue(1.0);
     }
     @FXML
     void dropTablesButton (ActionEvent event){
@@ -373,7 +377,7 @@ public class MainAppController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        Statement conn = OracleCon.connectDB();
     }
 
 

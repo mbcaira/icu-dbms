@@ -127,12 +127,23 @@ public class CreateTables {
                     "    FOREIGN KEY (admin_id) REFERENCES administrator(admin_id),\n" +
                     "    FOREIGN KEY (patient_id) REFERENCES patient(patient_id),\n" +
                     "    FOREIGN KEY (pharmacist_id) REFERENCES pharmacist(pharmacist_id)\n" +
-                    ")")
+                    ")"),
+            ("CREATE VIEW scrub_nurses AS\n" +
+                    "SELECT first_name, last_name\n" +
+                    "FROM nurse\n" +
+                    "WHERE specialization = 'Scrub Nurse'\n"),
+            ("CREATE VIEW high_cost_surgeries AS\n" +
+                    "SELECT operation_type, medical_bill\n" +
+                    "FROM surgery\n" +
+                    "WHERE medical_bill>200\n"),
+            ("CREATE VIEW new_pharmacists AS\n" +
+                    "SELECT first_name, last_name\n" +
+                    "FROM pharmacist\n" +
+                    "WHERE prescriptions_filled<100\n")
     };
     public String create(){
         String out = "";
         Statement conn = OracleCon.connectDB();
-        boxString = "";
         for (String command : createCommands) {
             try {
                 conn.execute(command);
@@ -144,7 +155,8 @@ public class CreateTables {
                 boxString += ("Failed to execute: "+command);
                 out += "Failed to execute: "+command+"\n";
             }
+            boxString += " \n";
         }
-        return out;
+        return out+"\nTables created.";
     }
 }
