@@ -25,9 +25,20 @@ public class Update {
         };
         String updateStatement = "UPDATE "+tables[flag-1]+" SET";
         String condStatement = " WHERE";
-        String out = "";
         Statement conn = OracleCon.connectDB();
         boxString = "";
+        for (int i = 0; i < updates.length; i++) {
+            if (updates[i] != null && i != updates.length - 1) {
+                updateStatement += " " + updates[i] + ",";
+            } else {
+                if (primKeys[i] != null) {
+                    updateStatement += " "+updates[i];
+                }
+            }
+        }
+        if (updateStatement.endsWith(",")) {
+            updateStatement = updateStatement.substring(0, updateStatement.length()-1);
+        }
         for (int i = 0; i < primKeys.length; i++) {
             if (primKeys[i] != null && i != primKeys.length - 1) {
                 condStatement += " " + primKeys[i] + " AND";
@@ -46,11 +57,9 @@ public class Update {
             conn.executeUpdate(updateStatement);
             System.out.println("Executed: "+updateStatement);
             boxString += ("Executed: "+updateStatement+"\n");
-            out += "Executed: "+updateStatement+"\n";
         } catch (Exception e) {
             System.out.println("Failed to execute: "+updateStatement+"\n"+e);
             boxString += ("Failed to execute: "+updateStatement);
-            out += "Failed to execute: "+updateStatement+"\n";
         }
     }
 }

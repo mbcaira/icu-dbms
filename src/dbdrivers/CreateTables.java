@@ -33,7 +33,7 @@ public class CreateTables {
                     ")"),
             ("CREATE TABLE operating_room(\n" +
                     "    room_number INT PRIMARY KEY,\n" +
-                    "    speciality VARCHAR2 (30)\n" +
+                    "    specialty VARCHAR2 (30)\n" +
                     ")"),
             ("CREATE TABLE writes_prescription(\n" +
                     "    physician_id INT NOT NULL,\n" +
