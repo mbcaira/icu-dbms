@@ -5,7 +5,7 @@ import java.sql.Statement;
 public class Update {
     public String boxString = "";
 
-    public void updateRow(String[] primKeys, String[] updates, int flag) {
+    public void updateRow(String[] params, String[] updates, int flag) {
         String[] tables = {
                 "ADMINISTRATOR",
                 "ASSISTS",
@@ -18,6 +18,7 @@ public class Update {
                 "PATIENT",
                 "PATIENT_ROOM",
                 "PERFORMS",
+                "PHARMACIST",
                 "PHYSICIAN",
                 "SURGERY",
                 "TREATED_BY",
@@ -28,10 +29,10 @@ public class Update {
         Statement conn = OracleCon.connectDB();
         boxString = "";
         for (int i = 0; i < updates.length; i++) {
-            if (updates[i] != null && i != updates.length - 1) {
+            if (updates[i] != "" && i != updates.length - 1) {
                 updateStatement += " " + updates[i] + ",";
             } else {
-                if (primKeys[i] != null) {
+                if (params[i] != "") {
                     updateStatement += " "+updates[i];
                 }
             }
@@ -39,12 +40,12 @@ public class Update {
         if (updateStatement.endsWith(",")) {
             updateStatement = updateStatement.substring(0, updateStatement.length()-1);
         }
-        for (int i = 0; i < primKeys.length; i++) {
-            if (primKeys[i] != null && i != primKeys.length - 1) {
-                condStatement += " " + primKeys[i] + " AND";
+        for (int i = 0; i < params.length; i++) {
+            if (params[i] != "" && i != params.length - 1) {
+                condStatement += " " + params[i] + " AND";
             } else {
-                if (primKeys[i] != null) {
-                    condStatement += " "+primKeys[i];
+                if (params[i] != "") {
+                    condStatement += " "+params[i];
                 }
             }
         }
