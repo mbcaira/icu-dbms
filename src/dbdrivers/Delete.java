@@ -29,10 +29,10 @@ public class Delete {
         Statement conn = OracleCon.connectDB();
         boxString = "";
         for (int i = 0; i < params.length; i++) {
-            if (params[i] != "" && i != params.length - 1) {
+            if (!params[i].equals("") && i != params.length - 1) {
                 deleteStatement += " " + params[i] + " AND";
             } else {
-                if (params[i] != "") {
+                if (!params[i].equals("")) {
                     deleteStatement += " "+params[i];
                 }
             }

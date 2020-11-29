@@ -59,19 +59,17 @@ public class PopulateTables {
             ("INSERT INTO located_in VALUES(0,3,56,51,901,20)\n")
     };
     public void populate(){
-        String out = "";
         Statement conn = OracleCon.connectDB();
         boxString = "";
         for (String command : populateCommands) {
             try {
+                assert conn != null;
                 conn.execute(command);
                 System.out.println("Executed: "+command);
                 boxString += ("Executed: "+command+"\n");
-                out += "Executed: "+command+"\n";
             } catch (Exception e) {
                 System.out.println("Failed to execute: "+command);
                 boxString += ("Failed to exectute: "+command+"\n");
-                out += "Failed to execute: "+command+"\n";
             }
         }
     }

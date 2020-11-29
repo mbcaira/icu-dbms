@@ -30,10 +30,10 @@ public class Search {
         boxString = "";
         String searchString = "SELECT * FROM "+tables[flag-1]+" WHERE";
         for (int i = 0; i < params.length; i++) {
-            if (params[i] != "" && i != params.length - 1) {
+            if (!params[i].equals("") && i != params.length - 1) {
                 searchString += " " + params[i] + " AND";
             } else {
-                if (params[i] != "") {
+                if (!params[i].equals("")) {
                     searchString += " "+params[i];
                 }
             }
@@ -42,6 +42,7 @@ public class Search {
             searchString = searchString.substring(0, searchString.length()-3);
         }
         try {
+            assert conn != null;
             ResultSet rs = conn.executeQuery(searchString);
             System.out.println("Executed: "+searchString);
             ResultSetMetaData rsmd = rs.getMetaData();

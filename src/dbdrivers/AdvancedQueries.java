@@ -2,7 +2,6 @@ package dbdrivers;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 public class AdvancedQueries {
@@ -48,12 +47,12 @@ public class AdvancedQueries {
         };
     }
 
-    public void advancedQueries() throws SQLException {
+    public void advancedQueries() {
         Statement conn = OracleCon.connectDB();
-        String out = "";
         boxString = "";
         for (String command : queries) {
             try {
+                assert conn != null;
                 ResultSet rs = conn.executeQuery(command);
                 System.out.println("Executed: "+command);
                 ResultSetMetaData rsmd = rs.getMetaData();

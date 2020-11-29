@@ -29,10 +29,10 @@ public class Update {
         Statement conn = OracleCon.connectDB();
         boxString = "";
         for (int i = 0; i < updates.length; i++) {
-            if (updates[i] != "" && i != updates.length - 1) {
+            if (!updates[i].equals("") && i != updates.length - 1) {
                 updateStatement += " " + updates[i] + ",";
             } else {
-                if (params[i] != "") {
+                if (!params[i].equals("")) {
                     updateStatement += " "+updates[i];
                 }
             }
@@ -41,15 +41,15 @@ public class Update {
             updateStatement = updateStatement.substring(0, updateStatement.length()-1);
         }
         for (int i = 0; i < params.length; i++) {
-            if (params[i] != "" && i != params.length - 1) {
+            if (!params[i].equals("") && i != params.length - 1) {
                 condStatement += " " + params[i] + " AND";
             } else {
-                if (params[i] != "") {
+                if (!params[i].equals("")) {
                     condStatement += " "+params[i];
                 }
             }
         }
-        if (condStatement.substring(condStatement.length()-3).equals("AND")) {
+        if (condStatement.endsWith("AND")) {
             condStatement = condStatement.substring(0, condStatement.length()-3);
         }
         updateStatement += condStatement;

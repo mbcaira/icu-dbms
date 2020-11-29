@@ -141,22 +141,19 @@ public class CreateTables {
                     "FROM pharmacist\n" +
                     "WHERE prescriptions_filled<100\n")
     };
-    public String create(){
-        String out = "";
+    public void create(){
         Statement conn = OracleCon.connectDB();
         for (String command : createCommands) {
             try {
+                assert conn != null;
                 conn.execute(command);
                 System.out.println("Executed: "+command);
                 boxString += ("Executed: "+command);
-                out += "Executed: "+command+"\n";
             } catch (Exception e) {
                 System.out.println("Failed to execute: "+command);
                 boxString += ("Failed to execute: "+command);
-                out += "Failed to execute: "+command+"\n";
             }
             boxString += " \n";
         }
-        return out+"\nTables created.";
     }
 }

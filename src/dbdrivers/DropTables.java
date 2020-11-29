@@ -25,22 +25,19 @@ public class DropTables {
             "DROP VIEW high_cost_surgeries",
             "DROP VIEW new_pharmacists"
     };
-    public String drop(){
-        String out = "";
+    public void drop(){
         boxString = "";
         Statement conn = OracleCon.connectDB();
         for (String command : dropCommands) {
             try {
+                assert conn != null;
                 conn.execute(command);
                 System.out.println("Executed: "+command);
                 boxString += ("Executed: "+command+"\n");
-                out += "Executed: "+command+"\n";
             } catch (Exception e) {
                 System.out.println("Failed to execute: "+command);
                 boxString += ("Failed to exectute: "+command+"\n");
-                out += "Failed to execute: "+command+"\n";
             }
         }
-        return out;
     }
 }

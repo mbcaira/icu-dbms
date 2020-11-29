@@ -2,7 +2,6 @@ package dbdrivers;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SimpleQueries {
@@ -64,11 +63,12 @@ public class SimpleQueries {
         };
     }
 
-    public void queries() throws SQLException {
+    public void queries() {
         Statement conn = OracleCon.connectDB();
         boxString = "";
         for (String command : queries) {
             try {
+                assert conn != null;
                 ResultSet rs = conn.executeQuery(command);
                 System.out.println("Executed: "+command);
                 ResultSetMetaData rsmd = rs.getMetaData();
