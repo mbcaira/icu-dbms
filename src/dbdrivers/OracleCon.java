@@ -34,7 +34,4 @@ public class OracleCon {
             boxString += "Error disconnecting, test connection to see if a connection exists.\n";
         }
     }
-    public static void main(String[] args){
-        OracleCon.connectDB();
-    }
 }
