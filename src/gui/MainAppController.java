@@ -1,4 +1,4 @@
-package sample;
+package gui;
 
 import dbdrivers.*;
 import javafx.application.Platform;
@@ -26,7 +26,7 @@ public class MainAppController implements Initializable {
      * Initializes the controller class.
      */
 
-    int currentState;
+    // Defining all JavaFX Labels, Buttons, Panes, etc.
     @FXML Label label1;
     @FXML Label label2;
     @FXML Label label3;
@@ -50,8 +50,10 @@ public class MainAppController implements Initializable {
     @FXML TextField textField8;
     @FXML TextField textField9;
     @FXML TextField textField10;
+    // All other definitions
     String ongoingOutput = "";
     int i;
+    int currentState;
     String[] textInputs = {null, null, null, null, null, null, null, null, null, null};
     String[] updatedArray = {null, null, null, null, null, null, null, null, null, null};
     String[] tempArray = {null, null, null, null, null, null, null, null, null, null};
@@ -65,14 +67,16 @@ public class MainAppController implements Initializable {
     Update u = new Update();
     Search r = new Search();
 
+    // Test the connection to oracle
     @FXML
     void testConnectionButton (ActionEvent event){
-        o.connectDB();
-        ongoingOutput += o.boxString;
+        o.connectDB();                              // Tests the connection
+        ongoingOutput += o.boxString;               // Sets the text to the ScrollPane
         boxText.setText(ongoingOutput);
         pane.setContent(boxText);
-        pane.setVvalue(1.0);
+        pane.setVvalue(1.0);                        // Auto-scrolls to the bottom
     }
+    // Creates the Tables
     @FXML
     void createTablesButton (ActionEvent event){
         t.create();                                 // Creates the tables
@@ -81,44 +85,50 @@ public class MainAppController implements Initializable {
         pane.setContent(boxText);
         pane.setVvalue(1.0);                        // Auto-scrolls to the bottom
     }
+    // Populates the table with predetermined data
     @FXML
     void populateTablesButton (ActionEvent event){
-        p.populate();
+        p.populate();                               // Populates the tables with data
         ongoingOutput += p.boxString;               // Sets the text to the ScrollPane
         boxText.setText(ongoingOutput);
         pane.setContent(boxText);
-        pane.setVvalue(1.0);
+        pane.setVvalue(1.0);                        // Auto-scrolls to the bottom
     }
+    // Preforms simple queries on the database
     @FXML
     void runSimpleButton (ActionEvent event) throws SQLException {
-        s.queries();                                 // Creates the tables
-        ongoingOutput += s.boxString;               // Sets the text to the ScrollPane
+        s.queries();                                 // Queries the tables
+        ongoingOutput += s.boxString;                // Sets the text to the ScrollPane
         boxText.setText(ongoingOutput);
         pane.setContent(boxText);
-        pane.setVvalue(1.0);
+        pane.setVvalue(1.0);                        // Auto-scrolls to the bottom
     }
+    // Preforms advanced queries on the database
     @FXML
     void runAdvancedButton (ActionEvent event) throws SQLException {
-        a.advancedQueries();                                 // Creates the tables
+        a.advancedQueries();                        // Queries the tables
         ongoingOutput += a.boxString;               // Sets the text to the ScrollPane
         boxText.setText(ongoingOutput);
         pane.setContent(boxText);
-        pane.setVvalue(1.0);
+        pane.setVvalue(1.0);                        // Auto-scrolls to the bottom
     }
+    // Drops the tables
     @FXML
     void dropTablesButton (ActionEvent event){
-        d.drop();                                       // Deletes the tables
-        ongoingOutput += d.boxString;                   // Sets the ScrollPane to the text
+        d.drop();                                   // Deletes the tables
+        ongoingOutput += d.boxString;               // Sets the ScrollPane to the text
         boxText.setText(ongoingOutput);
         pane.setContent(boxText);
-        pane.setVvalue(1.0);                            // Auto-scrolls to the bottom
+        pane.setVvalue(1.0);                        // Auto-scrolls to the bottom
     }
+    // controls what happens when the Administrator button is clicked
     @FXML
     void administratorButton (ActionEvent event){
         currentState = 1;
         text.setText("To DELETE an Administrator: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD an Administrator: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing administrator: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing administrator: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Administrator: enter the data constraints you would like to search, then click the search button");
         label1.setText("Administrator ID:");
         label2.setText("First Name:");
         label3.setText("Last Name:");
@@ -131,12 +141,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Assists button is clicked
     @FXML
     void assistsButton (ActionEvent event){
         currentState = 2;
         text.setText("To DELETE an Assists Relationship: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD an Assists Relationship: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Assists Relationship: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Assists Relationship: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Assists Relationship: enter the data constraints you would like to search, then click the search button");
         label1.setText("Nurse ID:");
         label2.setText("Operation ID:");
         label3.setText("");
@@ -149,12 +161,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Emerg.Contact button is clicked
     @FXML
     void emergContactButton (ActionEvent event){
         currentState = 3;
         text.setText("To DELETE a Contact: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD an Contact: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Contact: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Contact: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Emergency Contact: enter the data constraints you would like to search, then click the search button");
         label1.setText("Patient ID:");
         label2.setText("Phone Number:");
         label3.setText("First Name:");
@@ -167,12 +181,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Hospital button is clicked
     @FXML
     void hospitalButton (ActionEvent event){
         currentState = 4;
         text.setText("To DELETE a Hospital: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD a Hospital: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Hospital: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Hospital: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Hospital: enter the data constraints you would like to search, then click the search button");
         label1.setText("Hospital ID:");
         label2.setText("Address:");
         label3.setText("Name:");
@@ -185,12 +201,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Located in button is clicked
     @FXML
     void locatedInButton (ActionEvent event){
         currentState = 5;
         text.setText("To DELETE a Located In Relationship: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD a Located In Relationship: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Located In Relationship: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Located In Relationship: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Located In Relationship: enter the data constraints you would like to search, then click the search button");
         label1.setText("Hospital ID:");
         label2.setText("Medical ID:");
         label3.setText("Patient Room:");
@@ -203,12 +221,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Medical Bill button is clicked
     @FXML
     void medicalBillButton (ActionEvent event){
         currentState = 6;
         text.setText("To DELETE a Medical Bill: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD a Medical Bill: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Medical Bill: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Medical Bill: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Medical Bill: enter the data constraints you would like to search, then click the search button");
         label1.setText("Patient ID:");
         label2.setText("Bill ID:");
         label3.setText("Total Cost:");
@@ -221,12 +241,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Nurse button is clicked
     @FXML
     void nurseButton (ActionEvent event){
         currentState = 7;
         text.setText("To DELETE a Nurse: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD an Administrator Nurse: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Nurse: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Nurse: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Nurse: enter the data constraints you would like to search, then click the search button");
         label1.setText("Physician ID:");
         label2.setText("First Name:");
         label3.setText("Last Name:");
@@ -239,12 +261,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Operating Room button is clicked
     @FXML
     void operatingRoomButton (ActionEvent event){
         currentState = 8;
         text.setText("To DELETE an Operating Room: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD an Operating Room: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Operating Room: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Operating Room: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Operating Room: enter the data constraints you would like to search, then click the search button");
         label1.setText("Room Number:");
         label2.setText("Specialty:");
         label3.setText("");
@@ -257,12 +281,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Patient button is clicked
     @FXML
     void patientButton (ActionEvent event){
         currentState = 9;
         text.setText("To DELETE a Patient: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD a Patient: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Patient: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Patient: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Patient: enter the data constraints you would like to search, then click the search button");
         label1.setText("Patient ID:");
         label2.setText("First Name:");
         label3.setText("Last Name:");
@@ -275,12 +301,14 @@ public class MainAppController implements Initializable {
         label10.setText("Administator ID:");
         pane.setContent(text);
     }
+    // controls what happens when the Patient Room button is clicked
     @FXML
     void patientRoomButton (ActionEvent event){
         currentState = 10;
         text.setText("To DELETE a Patient Room: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD a Patient Room: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Patient Room: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Patient Room: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Patient Room: enter the data constraints you would like to search, then click the search button");
         label1.setText("Room Number:");
         label2.setText("");
         label3.setText("");
@@ -293,12 +321,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Preforms button is clicked
     @FXML
     void preformsButton (ActionEvent event){
         currentState = 11;
-        text.setText("To DELETE a Preforms Relationship: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD a Preforms Relationship: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Preforms Relationship: enter the data you would like to change, then click the update button");
+        text.setText("To DELETE a Performs Relationship: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD a Performs Relationship: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Performs Relationship: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Performs Relationship: enter the data constraints you would like to search, then click the search button");
         label1.setText("Physician ID:");
         label2.setText("Lead Physician:");
         label3.setText("Operation ID:");
@@ -311,12 +341,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Pharmacist button is clicked
     @FXML
     void pharmacistButton (ActionEvent event){
         currentState = 12;
         text.setText("To DELETE a Pharmacist: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD a Pharmacist: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Pharmacist: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Pharmacist: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Pharmacist: enter the data constraints you would like to search, then click the search button");
         label1.setText("Pharmacist ID:");
         label2.setText("First Name:");
         label3.setText("Last Name:");
@@ -329,12 +361,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Physician button is clicked
     @FXML
     void physicianButton (ActionEvent event){
         currentState = 13;
         text.setText("To DELETE a Physician: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD a Physician: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Physician: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Physician: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Physician: enter the data constraints you would like to search, then click the search button");
         label1.setText("Physician ID:");
         label2.setText("First Name:");
         label3.setText("Last Name:");
@@ -347,12 +381,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Surgery button is clicked
     @FXML
     void surgeryButton (ActionEvent event) {
         currentState = 14;
         text.setText("To DELETE a Surgery: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD a Surgery: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Surgery: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Surgery: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Surgery: enter the data constraints you would like to search, then click the search button");
         label1.setText("Patient ID:");
         label2.setText("Operation ID:");
         label3.setText("Operation Type:");
@@ -365,12 +401,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Treated By button is clicked
     @FXML
     void treatedByButton (ActionEvent event){
         currentState = 15;
         text.setText("To DELETE a Treated By Relationship: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD a Treated By Relationship: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Treated By Relationship: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Treated By Relationship: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Treated By Relationship: enter the data constraints you would like to search, then click the search button");
         label1.setText("Patient ID:");
         label2.setText("Physician ID:");
         label3.setText("Nurse ID:");
@@ -383,12 +421,14 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Writes Prescription button is clicked
     @FXML
     void writesPrescriptionButton (ActionEvent event){
         currentState = 16;
         text.setText("To DELETE a Writes Prescription Relationship: Enter one or many fields referencing the data you would like to " +
                 "delete, then click the delete button \nTo ADD a Writes Prescription Relationship: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Writes Prescription Relationship: enter the data you would like to change, then click the update button");
+                "relevant data, and click the add button \nTo UPDATE an existing Writes Prescription Relationship: enter the data you would like to change, then click the update button" +
+                "\nTo Search an existing Writes Prescription Relationship: enter the data constraints you would like to search, then click the search button");
         label1.setText("Physician ID:");
         label2.setText("Pharmacist ID:");
         label3.setText("");
@@ -401,6 +441,7 @@ public class MainAppController implements Initializable {
         label10.setText("");
         pane.setContent(text);
     }
+    // controls what happens when the Delete button is clicked
     @FXML
     void deleteButton(ActionEvent event){
         e.deleteRow(submitTextFields(), currentState);
@@ -411,6 +452,7 @@ public class MainAppController implements Initializable {
         pane.setVvalue(1.0);
         currentState = 0;
     }
+    // controls what happens when the Update button is clicked
     @FXML
     void updateButton(ActionEvent event){
         submitTextFields();
@@ -421,6 +463,7 @@ public class MainAppController implements Initializable {
         text.setText("To finish your UPDATE, enter the data you would like to change, and then click the submit button");
         pane.setContent(text);
     }
+    // controls what happens when the Submit button is clicked
     @FXML
     void submitButton(ActionEvent event){
         submitTextFields();
@@ -429,24 +472,24 @@ public class MainAppController implements Initializable {
         }
         u.updateRow(tempArray, updatedArray, currentState);
         clearTextFields();
-        ongoingOutput += e.boxString;               // Sets the text to the ScrollPane
+        ongoingOutput += u.boxString;               // Sets the text to the ScrollPane
         boxText.setText(ongoingOutput);
         pane.setContent(boxText);
         pane.setVvalue(1.0);
         currentState = 0;
     }
-
+    // controls what happens when the Search button is clicked
     @FXML
     void searchButton (ActionEvent event){
         r.searchEntry(submitTextFields(), currentState);
         clearTextFields();
-        ongoingOutput += e.boxString;               // Sets the text to the ScrollPane
+        ongoingOutput += r.boxString;               // Sets the text to the ScrollPane
         boxText.setText(ongoingOutput);
         pane.setContent(boxText);
         pane.setVvalue(1.0);
         currentState = 0;
     }
-
+    // controls what happens when the Exit Application button is clicked
     @FXML
     void exitApplicationButton (ActionEvent event){
         Platform.exit();
@@ -464,7 +507,9 @@ public class MainAppController implements Initializable {
         textField9.clear();
         textField10.clear();
     }
-    public String[] submitTextFields(){
+
+    // Method that reads the inputs of the textfields
+    public String[] submitTextFields (){
         switch (currentState) {
             case 1:                 // ADMIN DELETE
                 if (textField1.getText().equals("")){
@@ -477,13 +522,13 @@ public class MainAppController implements Initializable {
                     textInputs[1] = textField2.getText();
                 }
                 else {
-                    textInputs[1] = "first_name=" + textField2.getText();
+                    textInputs[1] = "first_name=" + "'" + textField2.getText() + "'" ;
                 }
                 if (textField3.getText().equals("")){
                     textInputs[2] = textField3.getText();
                 }
                 else {
-                    textInputs[2] = "last_name=" + textField3.getText();
+                    textInputs[2] = "last_name=" + "'" + textField3.getText() + "'";
                 }
                 textInputs[3] = textField4.getText();
                 textInputs[4] = textField5.getText();
@@ -532,25 +577,25 @@ public class MainAppController implements Initializable {
                     textInputs[2] = textField3.getText();
                 }
                 else {
-                    textInputs[2] = "first_name=" + textField3.getText();
+                    textInputs[2] = "first_name=" + "'" + textField3.getText() + "'";
                 }
                 if (textField4.getText().equals("")){
                     textInputs[3] = textField4.getText();
                 }
                 else {
-                    textInputs[3] = "last_name=" + textField4.getText();
+                    textInputs[3] = "last_name=" + "'" + textField4.getText() + "'";
                 }
                 if (textField5.getText().equals("")){
                     textInputs[4] = textField5.getText();
                 }
                 else {
-                    textInputs[4] = "address=" + textField5.getText();
+                    textInputs[4] = "address=" + "'" + textField5.getText() + "'";
                 }
                 if (textField6.getText().equals("")){
                     textInputs[5] = textField6.getText();
                 }
                 else {
-                    textInputs[5] = "relation_to_patient=" + textField6.getText();
+                    textInputs[5] = "relation_to_patient=" + "'" + textField6.getText() + "'";
                 }
                 textInputs[6] = textField7.getText();
                 textInputs[7] = textField8.getText();
@@ -568,13 +613,13 @@ public class MainAppController implements Initializable {
                     textInputs[1] = textField2.getText();
                 }
                 else {
-                    textInputs[1] = "address=" + textField2.getText();
+                    textInputs[1] = "address=" + "'" + textField2.getText() + "'";
                 }
                 if (textField3.getText().equals("")){
                     textInputs[2] = textField3.getText();
                 }
                 else {
-                    textInputs[2] = "name=" + textField3.getText();
+                    textInputs[2] = "name=" + "'" + textField3.getText() + "'";
                 }
                 textInputs[3] = textField4.getText();
                 textInputs[4] = textField5.getText();
@@ -664,19 +709,19 @@ public class MainAppController implements Initializable {
                     textInputs[1] = textField2.getText();
                 }
                 else {
-                    textInputs[1] = "first_name=" + textField2.getText();
+                    textInputs[1] = "first_name=" + "'" + textField2.getText() + "'";
                 }
                 if (textField3.getText().equals("")){
                     textInputs[2] = textField3.getText();
                 }
                 else {
-                    textInputs[2] = "last_name=" + textField3.getText();
+                    textInputs[2] = "last_name=" + "'" + textField3.getText() + "'";
                 }
                 if (textField4.getText().equals("")){
                     textInputs[3] = textField4.getText();
                 }
                 else {
-                    textInputs[3] = "specialization=" + textField4.getText();
+                    textInputs[3] = "specialization=" + "'" + textField4.getText() + "'";
                 }
                 textInputs[4] = textField5.getText();
                 textInputs[5] = textField6.getText();
@@ -696,7 +741,7 @@ public class MainAppController implements Initializable {
                     textInputs[1] = textField2.getText();
                 }
                 else {
-                    textInputs[1] = "specialty=" + textField2.getText();
+                    textInputs[1] = "speciality=" + "'" + textField2.getText() + "'";
                 }
                 textInputs[2] = textField3.getText();
                 textInputs[3] = textField4.getText();
@@ -718,13 +763,13 @@ public class MainAppController implements Initializable {
                     textInputs[1] = textField2.getText();
                 }
                 else {
-                    textInputs[1] = "first_name=" + textField2.getText();
+                    textInputs[1] = "first_name=" + "'" + textField2.getText() + "'";
                 }
                 if (textField3.getText().equals("")){
                     textInputs[2] = textField3.getText();
                 }
                 else {
-                    textInputs[2] = "last_name=" + textField3.getText();
+                    textInputs[2] = "last_name=" + "'" + textField3.getText() + "'";
                 }
                 if (textField4.getText().equals("")){
                     textInputs[3] = textField4.getText();
@@ -824,13 +869,13 @@ public class MainAppController implements Initializable {
                     textInputs[1] = textField2.getText();
                 }
                 else {
-                    textInputs[1] = "first_name=" + textField2.getText();
+                    textInputs[1] = "first_name=" + "'" + textField2.getText() + "'";
                 }
                 if (textField3.getText().equals("")){
                     textInputs[2] = textField3.getText();
                 }
                 else {
-                    textInputs[2] = "last_name=" + textField3.getText();
+                    textInputs[2] = "last_name=" + "'" + textField3.getText() + "'";
                 }
                 if (textField4.getText().equals("")){
                     textInputs[3] = textField4.getText();
@@ -856,19 +901,19 @@ public class MainAppController implements Initializable {
                     textInputs[1] = textField2.getText();
                 }
                 else {
-                    textInputs[1] = "first_name=" + textField2.getText();
+                    textInputs[1] = "first_name=" + "'" +  textField2.getText() + "'";
                 }
                 if (textField3.getText().equals("")){
                     textInputs[2] = textField3.getText();
                 }
                 else {
-                    textInputs[2] = "last_name=" + textField3.getText();
+                    textInputs[2] = "last_name=" + "'" +  textField3.getText() + "'";
                 }
                 if (textField4.getText().equals("")){
                     textInputs[3] = textField4.getText();
                 }
                 else {
-                    textInputs[3] = "specialty=" + textField4.getText();
+                    textInputs[3] = "specialty=" + "'" +  textField4.getText() + "'";
                 }
                 textInputs[4] = textField5.getText();
                 textInputs[5] = textField6.getText();
@@ -894,7 +939,7 @@ public class MainAppController implements Initializable {
                     textInputs[2] = textField3.getText();
                 }
                 else {
-                    textInputs[2] = "operation_type=" + textField3.getText();
+                    textInputs[2] = "operation_type=" + "'" + textField3.getText() + "'";
                 }
                 if (textField4.getText().equals("")){
                     textInputs[3] = textField4.getText();
@@ -933,6 +978,28 @@ public class MainAppController implements Initializable {
                 else {
                     textInputs[2] = "nurse_id=" + textField3.getText();
                 }
+                textInputs[3] = textField4.getText();
+                textInputs[4] = textField5.getText();
+                textInputs[5] = textField6.getText();
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 16:                    // DELETE Writes Prescription
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "physician_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "patient_id=" + textField2.getText();
+                }
+                textInputs[2] = textField3.getText();
                 textInputs[3] = textField4.getText();
                 textInputs[4] = textField5.getText();
                 textInputs[5] = textField6.getText();
