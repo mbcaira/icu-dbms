@@ -725,7 +725,7 @@ public class MainAppController implements Initializable {
                     textInputs[1] = textField2.getText();
                 }
                 else {
-                    textInputs[1] = "speciality=" + "'" + textField2.getText() + "'";
+                    textInputs[1] = "specialty=" + "'" + textField2.getText() + "'";
                 }
                 textInputs[2] = textField3.getText();
                 textInputs[3] = textField4.getText();
