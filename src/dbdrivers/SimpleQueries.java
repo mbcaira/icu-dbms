@@ -13,7 +13,7 @@ public class SimpleQueries {
     String[] queries;
     {
         queries = new String[]{
-                ("SELECT room_number, 'Performs operations of specialty ', speciality\n" +
+                ("SELECT room_number, 'Performs operations of specialty ', specialty\n" +
                         "   FROM operating_room\n" +
                         "   ORDER BY room_number ASC\n"),
                 ("SELECT 'patient with ID ', patient_id, 'Has a total bill of $', total_cost\n" +

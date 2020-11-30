@@ -22,18 +22,6 @@ public class AdvancedQueries {
                 ("SELECT patient.first_name, surgery.operation_type, surgery.operating_room\n" +
                         "FROM surgery\n" +
                         "LEFT JOIN patient ON patient.patient_id = surgery.patient_id"),
-                ("CREATE VIEW scrub_nurses AS\n" +
-                        "SELECT first_name, last_name\n" +
-                        "FROM nurse\n" +
-                        "WHERE specialization = 'Scrub Nurse'\n"),
-                ("CREATE VIEW high_cost_surgeries AS\n" +
-                        "SELECT operation_type, medical_bill\n" +
-                        "FROM surgery\n" +
-                        "WHERE medical_bill>200\n"),
-                ("CREATE VIEW new_pharmacists AS\n" +
-                        "SELECT first_name, last_name\n" +
-                        "FROM pharmacist\n" +
-                        "WHERE prescriptions_filled<100\n"),
                 ("SELECT first_name\n" +
                         "FROM patient\n" +
                         "WHERE EXISTS\n" +
