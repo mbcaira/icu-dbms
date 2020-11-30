@@ -51,12 +51,19 @@ public class MainAppController implements Initializable {
     @FXML TextField textField9;
     @FXML TextField textField10;
     String ongoingOutput = "";
+    int i;
+    String[] textInputs = {null, null, null, null, null, null, null, null, null, null};
+    String[] updatedArray = {null, null, null, null, null, null, null, null, null, null};
+    String[] tempArray = {null, null, null, null, null, null, null, null, null, null};
     CreateTables t = new CreateTables();
     DropTables d = new DropTables();
     OracleCon o = new OracleCon();
     SimpleQueries s = new SimpleQueries();
     PopulateTables p = new PopulateTables();
     AdvancedQueries a = new AdvancedQueries();
+    Delete e = new Delete();
+    Update u = new Update();
+    Search r = new Search();
 
     @FXML
     void testConnectionButton (ActionEvent event){
@@ -107,73 +114,11 @@ public class MainAppController implements Initializable {
         pane.setVvalue(1.0);                            // Auto-scrolls to the bottom
     }
     @FXML
-    void addPatientButton (ActionEvent event){
+    void administratorButton (ActionEvent event){
         currentState = 1;
-        text.setText("Enter needed information below to add new patient");
-        label1.setText("Patient ID:");
-        label2.setText("First Name:");
-        label3.setText("Last Name:");
-        label4.setText("OHIP Number:");
-        label5.setText("Phone Number");
-        label6.setText("Room Number");
-        label7.setText("Physician ID:");
-        label8.setText("Nurse ID:");
-        label9.setText("Pharmacist ID:");
-        label10.setText("Administator ID:");
-        pane.setContent(text);
-    }
-    @FXML
-    void addPhysicianButton (ActionEvent event){
-        currentState = 2;
-        text.setText("Enter needed information below to add new Physician");
-        label1.setText("Physician ID:");
-        label2.setText("First Name:");
-        label3.setText("Last Name:");
-        label4.setText("Specialty:");
-        label5.setText("");
-        label6.setText("");
-        label7.setText("");
-        label8.setText("");
-        label9.setText("");
-        label10.setText("");
-        pane.setContent(text);
-    }
-    @FXML
-    void addNurseButton (ActionEvent event){
-        currentState = 3;
-        text.setText("Enter needed information below to add new Nurse");
-        label1.setText("Physician ID:");
-        label2.setText("First Name:");
-        label3.setText("Last Name:");
-        label4.setText("Specialization:");
-        label5.setText("");
-        label6.setText("");
-        label7.setText("");
-        label8.setText("");
-        label9.setText("");
-        label10.setText("");
-        pane.setContent(text);
-    }
-    @FXML
-    void addPharmacistButton (ActionEvent event){
-        currentState = 4;
-        text.setText("Enter needed information below to add new Pharmacist");
-        label1.setText("Pharmacist ID:");
-        label2.setText("First Name:");
-        label3.setText("Last Name:");
-        label4.setText("Prescriptions Filled:");
-        label5.setText("");
-        label6.setText("");
-        label7.setText("");
-        label8.setText("");
-        label9.setText("");
-        label10.setText("");
-        pane.setContent(text);
-    }
-    @FXML
-    void addAdministratorButton (ActionEvent event){
-        currentState = 5;
-        text.setText("Enter needed information below to add new Administrator");
+        text.setText("To DELETE an Administrator: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD an Administrator: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing administrator: enter the data you would like to change, then click the update button");
         label1.setText("Administrator ID:");
         label2.setText("First Name:");
         label3.setText("Last Name:");
@@ -187,43 +132,13 @@ public class MainAppController implements Initializable {
         pane.setContent(text);
     }
     @FXML
-    void addSurgeryButton (ActionEvent event){
-        currentState = 6;
-        text.setText("Enter needed information below to add new Surgery");
-        label1.setText("Patient ID:");
+    void assistsButton (ActionEvent event){
+        currentState = 2;
+        text.setText("To DELETE an Assists Relationship: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD an Assists Relationship: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Assists Relationship: enter the data you would like to change, then click the update button");
+        label1.setText("Nurse ID:");
         label2.setText("Operation ID:");
-        label3.setText("Operation Type:");
-        label4.setText("Operating Room:");
-        label5.setText("Medical Bill");
-        label6.setText("");
-        label7.setText("");
-        label8.setText("");
-        label9.setText("");
-        label10.setText("");
-        pane.setContent(text);
-    }
-    @FXML
-    void addHospitalButton (ActionEvent event){
-        currentState = 7;
-        text.setText("Enter needed information below to add new Hospital");
-        label1.setText("Hospital ID:");
-        label2.setText("Address:");
-        label3.setText("Name:");
-        label4.setText("");
-        label5.setText("");
-        label6.setText("");
-        label7.setText("");
-        label8.setText("");
-        label9.setText("");
-        label10.setText("");
-        pane.setContent(text);
-    }
-    @FXML
-    void addPatientRoomButton (ActionEvent event){
-        currentState = 8;
-        text.setText("Enter needed information below to add new Patient Room");
-        label1.setText("Room Number:");
-        label2.setText("");
         label3.setText("");
         label4.setText("");
         label5.setText("");
@@ -235,41 +150,11 @@ public class MainAppController implements Initializable {
         pane.setContent(text);
     }
     @FXML
-    void addOperatingRoomButton (ActionEvent event){
-        currentState = 9;
-        text.setText("Enter needed information below to add new Operating room");
-        label1.setText("Room Number:");
-        label2.setText("Specialty:");
-        label3.setText("");
-        label4.setText("");
-        label5.setText("");
-        label6.setText("");
-        label7.setText("");
-        label8.setText("");
-        label9.setText("");
-        label10.setText("");
-        pane.setContent(text);
-    }
-    @FXML
-    void addMedicalBillButton (ActionEvent event){
-        currentState = 10;
-        text.setText("Enter needed information below to add new Medical Bill");
-        label1.setText("Patient ID:");
-        label2.setText("Bill ID:");
-        label3.setText("Total Cost:");
-        label4.setText("");
-        label5.setText("");
-        label6.setText("");
-        label7.setText("");
-        label8.setText("");
-        label9.setText("");
-        label10.setText("");
-        pane.setContent(text);
-    }
-    @FXML
-    void addEmergContactButton (ActionEvent event){
-        currentState = 11;
-        text.setText("Enter needed information below to add new Emergency Contact");
+    void emergContactButton (ActionEvent event){
+        currentState = 3;
+        text.setText("To DELETE a Contact: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD an Contact: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Contact: enter the data you would like to change, then click the update button");
         label1.setText("Patient ID:");
         label2.setText("Phone Number:");
         label3.setText("First Name:");
@@ -283,85 +168,290 @@ public class MainAppController implements Initializable {
         pane.setContent(text);
     }
     @FXML
-    void submitDataButton(ActionEvent event){
-        switch (currentState) {
-            case 1:                 // Adding new patient
-                text.setText("Trying to submit patient");
-                pane.setContent(text);
-                clearTextFields();
-                currentState = 0;
-                break;
-            case 2:                 // Adding new physician
-                text.setText("Trying to submit physician");
-                pane.setContent(text);
-                clearTextFields();
-                currentState = 0;
-                break;
-            case 3:                 // Adding new Nurse
-                text.setText("Trying to submit nurse");
-                pane.setContent(text);
-                clearTextFields();
-                currentState = 0;
-                break;
-            case 4:                 // Adding new Pharmacist
-                text.setText("Trying to submit pharmacist");
-                pane.setContent(text);
-                clearTextFields();
-                currentState = 0;
-                break;
-            case 5:                 // Adding new Administrator
-                text.setText("Trying to submit administrator");
-                pane.setContent(text);
-                clearTextFields();
-                currentState = 0;
-                break;
-            case 6:                 // Adding new Surgery
-                text.setText("Trying to submit surgery");
-                pane.setContent(text);
-                clearTextFields();
-                currentState = 0;
-                break;
-            case 7:                 // Adding new Hospital
-                text.setText("Trying to submit hospital");
-                pane.setContent(text);
-                clearTextFields();
-                currentState = 0;
-                break;
-            case 8:                 // Adding new Patient Room
-                text.setText("Trying to submit patient room");
-                pane.setContent(text);
-                clearTextFields();
-                currentState = 0;
-                break;
-            case 9:                 // Adding new Operating Room
-                text.setText("Trying to submit operating room");
-                pane.setContent(text);
-                clearTextFields();
-                currentState = 0;
-                break;
-            case 10:                // Adding new Medical Bill
-                text.setText("Trying to submit medical bill");
-                pane.setContent(text);
-                currentState = 0;
-                break;
-            case 11:                // Adding new Emergency Contact
-                text.setText("Trying to submit emergancy contact");
-                pane.setContent(text);
-                clearTextFields();
-                currentState = 0;
-                break;
-            default:
-                text.setText("Please choose a table to add to before submitting");
-                pane.setContent(text);
-                clearTextFields();
-                currentState = 0;
-                break;
-        }
+    void hospitalButton (ActionEvent event){
+        currentState = 4;
+        text.setText("To DELETE a Hospital: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD a Hospital: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Hospital: enter the data you would like to change, then click the update button");
+        label1.setText("Hospital ID:");
+        label2.setText("Address:");
+        label3.setText("Name:");
+        label4.setText("");
+        label5.setText("");
+        label6.setText("");
+        label7.setText("");
+        label8.setText("");
+        label9.setText("");
+        label10.setText("");
+        pane.setContent(text);
     }
+    @FXML
+    void locatedInButton (ActionEvent event){
+        currentState = 5;
+        text.setText("To DELETE a Located In Relationship: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD a Located In Relationship: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Located In Relationship: enter the data you would like to change, then click the update button");
+        label1.setText("Hospital ID:");
+        label2.setText("Medical ID:");
+        label3.setText("Patient Room:");
+        label4.setText("Admin ID:");
+        label5.setText("Patient ID:");
+        label6.setText("Pharmacist ID:");
+        label7.setText("");
+        label8.setText("");
+        label9.setText("");
+        label10.setText("");
+        pane.setContent(text);
+    }
+    @FXML
+    void medicalBillButton (ActionEvent event){
+        currentState = 6;
+        text.setText("To DELETE a Medical Bill: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD a Medical Bill: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Medical Bill: enter the data you would like to change, then click the update button");
+        label1.setText("Patient ID:");
+        label2.setText("Bill ID:");
+        label3.setText("Total Cost:");
+        label4.setText("");
+        label5.setText("");
+        label6.setText("");
+        label7.setText("");
+        label8.setText("");
+        label9.setText("");
+        label10.setText("");
+        pane.setContent(text);
+    }
+    @FXML
+    void nurseButton (ActionEvent event){
+        currentState = 7;
+        text.setText("To DELETE a Nurse: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD an Administrator Nurse: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Nurse: enter the data you would like to change, then click the update button");
+        label1.setText("Physician ID:");
+        label2.setText("First Name:");
+        label3.setText("Last Name:");
+        label4.setText("Specialization:");
+        label5.setText("");
+        label6.setText("");
+        label7.setText("");
+        label8.setText("");
+        label9.setText("");
+        label10.setText("");
+        pane.setContent(text);
+    }
+    @FXML
+    void operatingRoomButton (ActionEvent event){
+        currentState = 8;
+        text.setText("To DELETE an Operating Room: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD an Operating Room: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Operating Room: enter the data you would like to change, then click the update button");
+        label1.setText("Room Number:");
+        label2.setText("Specialty:");
+        label3.setText("");
+        label4.setText("");
+        label5.setText("");
+        label6.setText("");
+        label7.setText("");
+        label8.setText("");
+        label9.setText("");
+        label10.setText("");
+        pane.setContent(text);
+    }
+    @FXML
+    void patientButton (ActionEvent event){
+        currentState = 9;
+        text.setText("To DELETE a Patient: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD a Patient: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Patient: enter the data you would like to change, then click the update button");
+        label1.setText("Patient ID:");
+        label2.setText("First Name:");
+        label3.setText("Last Name:");
+        label4.setText("OHIP Number:");
+        label5.setText("Phone Number");
+        label6.setText("Room Number");
+        label7.setText("Physician ID:");
+        label8.setText("Nurse ID:");
+        label9.setText("Pharmacist ID:");
+        label10.setText("Administator ID:");
+        pane.setContent(text);
+    }
+    @FXML
+    void patientRoomButton (ActionEvent event){
+        currentState = 10;
+        text.setText("To DELETE a Patient Room: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD a Patient Room: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Patient Room: enter the data you would like to change, then click the update button");
+        label1.setText("Room Number:");
+        label2.setText("");
+        label3.setText("");
+        label4.setText("");
+        label5.setText("");
+        label6.setText("");
+        label7.setText("");
+        label8.setText("");
+        label9.setText("");
+        label10.setText("");
+        pane.setContent(text);
+    }
+    @FXML
+    void preformsButton (ActionEvent event){
+        currentState = 11;
+        text.setText("To DELETE a Preforms Relationship: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD a Preforms Relationship: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Preforms Relationship: enter the data you would like to change, then click the update button");
+        label1.setText("Physician ID:");
+        label2.setText("Lead Physician:");
+        label3.setText("Operation ID:");
+        label4.setText("");
+        label5.setText("");
+        label6.setText("");
+        label7.setText("");
+        label8.setText("");
+        label9.setText("");
+        label10.setText("");
+        pane.setContent(text);
+    }
+    @FXML
+    void pharmacistButton (ActionEvent event){
+        currentState = 12;
+        text.setText("To DELETE a Pharmacist: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD a Pharmacist: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Pharmacist: enter the data you would like to change, then click the update button");
+        label1.setText("Pharmacist ID:");
+        label2.setText("First Name:");
+        label3.setText("Last Name:");
+        label4.setText("Prescriptions Filled:");
+        label5.setText("");
+        label6.setText("");
+        label7.setText("");
+        label8.setText("");
+        label9.setText("");
+        label10.setText("");
+        pane.setContent(text);
+    }
+    @FXML
+    void physicianButton (ActionEvent event){
+        currentState = 13;
+        text.setText("To DELETE a Physician: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD a Physician: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Physician: enter the data you would like to change, then click the update button");
+        label1.setText("Physician ID:");
+        label2.setText("First Name:");
+        label3.setText("Last Name:");
+        label4.setText("Specialty:");
+        label5.setText("");
+        label6.setText("");
+        label7.setText("");
+        label8.setText("");
+        label9.setText("");
+        label10.setText("");
+        pane.setContent(text);
+    }
+    @FXML
+    void surgeryButton (ActionEvent event) {
+        currentState = 14;
+        text.setText("To DELETE a Surgery: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD a Surgery: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Surgery: enter the data you would like to change, then click the update button");
+        label1.setText("Patient ID:");
+        label2.setText("Operation ID:");
+        label3.setText("Operation Type:");
+        label4.setText("Operating Room:");
+        label5.setText("Medical Bill");
+        label6.setText("");
+        label7.setText("");
+        label8.setText("");
+        label9.setText("");
+        label10.setText("");
+        pane.setContent(text);
+    }
+    @FXML
+    void treatedByButton (ActionEvent event){
+        currentState = 15;
+        text.setText("To DELETE a Treated By Relationship: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD a Treated By Relationship: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Treated By Relationship: enter the data you would like to change, then click the update button");
+        label1.setText("Patient ID:");
+        label2.setText("Physician ID:");
+        label3.setText("Nurse ID:");
+        label4.setText("");
+        label5.setText("");
+        label6.setText("");
+        label7.setText("");
+        label8.setText("");
+        label9.setText("");
+        label10.setText("");
+        pane.setContent(text);
+    }
+    @FXML
+    void writesPrescriptionButton (ActionEvent event){
+        currentState = 16;
+        text.setText("To DELETE a Writes Prescription Relationship: Enter one or many fields referencing the data you would like to " +
+                "delete, then click the delete button \nTo ADD a Writes Prescription Relationship: Fill all empty text fields with " +
+                "relevant data, and click the add button \nTo UPDATE an existing Writes Prescription Relationship: enter the data you would like to change, then click the update button");
+        label1.setText("Physician ID:");
+        label2.setText("Pharmacist ID:");
+        label3.setText("");
+        label4.setText("");
+        label5.setText("");
+        label6.setText("");
+        label7.setText("");
+        label8.setText("");
+        label9.setText("");
+        label10.setText("");
+        pane.setContent(text);
+    }
+    @FXML
+    void deleteButton(ActionEvent event){
+        e.deleteRow(submitTextFields(), currentState);
+        clearTextFields();
+        ongoingOutput += e.boxString;               // Sets the text to the ScrollPane
+        boxText.setText(ongoingOutput);
+        pane.setContent(boxText);
+        pane.setVvalue(1.0);
+        currentState = 0;
+    }
+    @FXML
+    void updateButton(ActionEvent event){
+        submitTextFields();
+        for (i=0;i<10;i++){
+            tempArray[i] = textInputs[i];
+        }
+        clearTextFields();
+        text.setText("To finish your UPDATE, enter the data you would like to change, and then click the submit button");
+        pane.setContent(text);
+    }
+    @FXML
+    void submitButton(ActionEvent event){
+        submitTextFields();
+        for (i=0;i<10;i++){
+            updatedArray[i] = textInputs[i];
+        }
+        u.updateRow(tempArray, updatedArray, currentState);
+        clearTextFields();
+        ongoingOutput += e.boxString;               // Sets the text to the ScrollPane
+        boxText.setText(ongoingOutput);
+        pane.setContent(boxText);
+        pane.setVvalue(1.0);
+        currentState = 0;
+    }
+
+    @FXML
+    void searchButton (ActionEvent event){
+        r.searchEntry(submitTextFields(), currentState);
+        clearTextFields();
+        ongoingOutput += e.boxString;               // Sets the text to the ScrollPane
+        boxText.setText(ongoingOutput);
+        pane.setContent(boxText);
+        pane.setVvalue(1.0);
+        currentState = 0;
+    }
+
     @FXML
     void exitApplicationButton (ActionEvent event){
         Platform.exit();
     }
+
     public void clearTextFields(){
         textField1.clear();
         textField2.clear();
@@ -374,11 +464,496 @@ public class MainAppController implements Initializable {
         textField9.clear();
         textField10.clear();
     }
+    public String[] submitTextFields(){
+        switch (currentState) {
+            case 1:                 // ADMIN DELETE
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "admin_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "first_name=" + textField2.getText();
+                }
+                if (textField3.getText().equals("")){
+                    textInputs[2] = textField3.getText();
+                }
+                else {
+                    textInputs[2] = "last_name=" + textField3.getText();
+                }
+                textInputs[3] = textField4.getText();
+                textInputs[4] = textField5.getText();
+                textInputs[5] = textField6.getText();
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 2:                 // ASSISTS DELETE
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "nurse_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "operation_id=" + textField2.getText();
+                }
+                textInputs[2] = textField3.getText();
+                textInputs[3] = textField4.getText();
+                textInputs[4] = textField5.getText();
+                textInputs[5] = textField6.getText();
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 3:                 // DELETE EMERGENCY CONTACT
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "patient_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "phone_number=" + textField2.getText();
+                }
+                if (textField3.getText().equals("")){
+                    textInputs[2] = textField3.getText();
+                }
+                else {
+                    textInputs[2] = "first_name=" + textField3.getText();
+                }
+                if (textField4.getText().equals("")){
+                    textInputs[3] = textField4.getText();
+                }
+                else {
+                    textInputs[3] = "last_name=" + textField4.getText();
+                }
+                if (textField5.getText().equals("")){
+                    textInputs[4] = textField5.getText();
+                }
+                else {
+                    textInputs[4] = "address=" + textField5.getText();
+                }
+                if (textField6.getText().equals("")){
+                    textInputs[5] = textField6.getText();
+                }
+                else {
+                    textInputs[5] = "relation_to_patient=" + textField6.getText();
+                }
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 4:                 // DELETE HOSPITAL
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "hospital_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "address=" + textField2.getText();
+                }
+                if (textField3.getText().equals("")){
+                    textInputs[2] = textField3.getText();
+                }
+                else {
+                    textInputs[2] = "name=" + textField3.getText();
+                }
+                textInputs[3] = textField4.getText();
+                textInputs[4] = textField5.getText();
+                textInputs[5] = textField6.getText();
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 5:                 // DELETE LOCATED IN
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "hospital_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "medical_id=" + textField2.getText();
+                }
+                if (textField3.getText().equals("")){
+                    textInputs[2] = textField3.getText();
+                }
+                else {
+                    textInputs[2] = "patient_room=" + textField3.getText();
+                }
+                if (textField4.getText().equals("")){
+                    textInputs[3] = textField4.getText();
+                }
+                else {
+                    textInputs[3] = "admin_id=" + textField4.getText();
+                }
+                if (textField5.getText().equals("")){
+                    textInputs[4] = textField5.getText();
+                }
+                else {
+                    textInputs[4] = "patient_id=" + textField5.getText();
+                }
+                if (textField6.getText().equals("")){
+                    textInputs[5] = textField6.getText();
+                }
+                else {
+                    textInputs[5] = "pharmacist_id=" + textField6.getText();
+                }
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 6:                 // DELETE MEDICAL BILL
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "patient_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "bill_id=" + textField2.getText();
+                }
+                if (textField3.getText().equals("")){
+                    textInputs[2] = textField3.getText();
+                }
+                else {
+                    textInputs[2] = "total_cost=" + textField3.getText();
+                }
+                textInputs[3] = textField4.getText();
+                textInputs[4] = textField5.getText();
+                textInputs[5] = textField6.getText();
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 7:                 // DELETE NURSE
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "medical_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "first_name=" + textField2.getText();
+                }
+                if (textField3.getText().equals("")){
+                    textInputs[2] = textField3.getText();
+                }
+                else {
+                    textInputs[2] = "last_name=" + textField3.getText();
+                }
+                if (textField4.getText().equals("")){
+                    textInputs[3] = textField4.getText();
+                }
+                else {
+                    textInputs[3] = "specialization=" + textField4.getText();
+                }
+                textInputs[4] = textField5.getText();
+                textInputs[5] = textField6.getText();
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 8:                 // DELETE OPERATING ROOM
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "room_number=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "specialty=" + textField2.getText();
+                }
+                textInputs[2] = textField3.getText();
+                textInputs[3] = textField4.getText();
+                textInputs[4] = textField5.getText();
+                textInputs[5] = textField6.getText();
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 9:                 // DELETE PATIENT
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "patient_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "first_name=" + textField2.getText();
+                }
+                if (textField3.getText().equals("")){
+                    textInputs[2] = textField3.getText();
+                }
+                else {
+                    textInputs[2] = "last_name=" + textField3.getText();
+                }
+                if (textField4.getText().equals("")){
+                    textInputs[3] = textField4.getText();
+                }
+                else {
+                    textInputs[3] = "ohip_number=" + textField4.getText();
+                }
+                if (textField5.getText().equals("")){
+                    textInputs[4] = textField5.getText();
+                }
+                else {
+                    textInputs[4] = "phone_number=" + textField5.getText();
+                }
+                if (textField6.getText().equals("")){
+                    textInputs[5] = textField6.getText();
+                }
+                else {
+                    textInputs[5] = "room_number=" + textField6.getText();
+                }
+                if (textField7.getText().equals("")){
+                    textInputs[6] = textField7.getText();
+                }
+                else {
+                    textInputs[6] = "physician_id=" + textField7.getText();
+                }
+                if (textField8.getText().equals("")){
+                    textInputs[7] = textField8.getText();
+                }
+                else {
+                    textInputs[7] = "pharmacist_id=" + textField8.getText();
+                }
+                if (textField9.getText().equals("")){
+                    textInputs[8] = textField9.getText();
+                }
+                else {
+                    textInputs[8] = "nurse_id=" + textField9.getText();
+                }
+                if (textField10.getText().equals("")){
+                    textInputs[9] = textField10.getText();
+                }
+                else {
+                    textInputs[9] = "admin_id=" + textField10.getText();
+                }
+                break;
+            case 10:                // DELETE PATIENT ROOM
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "room_number=" + textField1.getText();
+                }
+                textInputs[1] = textField2.getText();
+                textInputs[2] = textField3.getText();
+                textInputs[3] = textField4.getText();
+                textInputs[4] = textField5.getText();
+                textInputs[5] = textField6.getText();
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 11:                // PREFORMS DELETE
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "physician_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "lead_physician=" + textField2.getText();
+                }
+                if (textField3.getText().equals("")){
+                    textInputs[2] = textField3.getText();
+                }
+                else {
+                    textInputs[2] = "operation_id=" + textField3.getText();
+                }
+                textInputs[3] = textField4.getText();
+                textInputs[4] = textField5.getText();
+                textInputs[5] = textField6.getText();
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 12:                // PHARMACIST DELETE
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "pharmacist_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "first_name=" + textField2.getText();
+                }
+                if (textField3.getText().equals("")){
+                    textInputs[2] = textField3.getText();
+                }
+                else {
+                    textInputs[2] = "last_name=" + textField3.getText();
+                }
+                if (textField4.getText().equals("")){
+                    textInputs[3] = textField4.getText();
+                }
+                else {
+                    textInputs[3] = "prescriptions_filled=" + textField4.getText();
+                }
+                textInputs[4] = textField5.getText();
+                textInputs[5] = textField6.getText();
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 13:                    // DELETE PHYSICIAN
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "medical_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "first_name=" + textField2.getText();
+                }
+                if (textField3.getText().equals("")){
+                    textInputs[2] = textField3.getText();
+                }
+                else {
+                    textInputs[2] = "last_name=" + textField3.getText();
+                }
+                if (textField4.getText().equals("")){
+                    textInputs[3] = textField4.getText();
+                }
+                else {
+                    textInputs[3] = "specialty=" + textField4.getText();
+                }
+                textInputs[4] = textField5.getText();
+                textInputs[5] = textField6.getText();
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 14:                       // DELETE SURGERY
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "patient_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "operation_id=" + textField2.getText();
+                }
+                if (textField3.getText().equals("")){
+                    textInputs[2] = textField3.getText();
+                }
+                else {
+                    textInputs[2] = "operation_type=" + textField3.getText();
+                }
+                if (textField4.getText().equals("")){
+                    textInputs[3] = textField4.getText();
+                }
+                else {
+                    textInputs[3] = "operating_room=" + textField4.getText();
+                }
+                if (textField5.getText().equals("")){
+                    textInputs[4] = textField5.getText();
+                }
+                else {
+                    textInputs[4] = "medical_bill=" + textField5.getText();
+                }
+                textInputs[5] = textField6.getText();
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            case 15:                    // DELETE TREATED BY
+                if (textField1.getText().equals("")){
+                    textInputs[0] = textField1.getText();
+                }
+                else {
+                    textInputs[0] = "patient_id=" + textField1.getText();
+                }
+                if (textField2.getText().equals("")){
+                    textInputs[1] = textField2.getText();
+                }
+                else {
+                    textInputs[1] = "physician_id=" + textField2.getText();
+                }
+                if (textField3.getText().equals("")){
+                    textInputs[2] = textField3.getText();
+                }
+                else {
+                    textInputs[2] = "nurse_id=" + textField3.getText();
+                }
+                textInputs[3] = textField4.getText();
+                textInputs[4] = textField5.getText();
+                textInputs[5] = textField6.getText();
+                textInputs[6] = textField7.getText();
+                textInputs[7] = textField8.getText();
+                textInputs[8] = textField9.getText();
+                textInputs[9] = textField10.getText();
+                break;
+            default:
+                text.setText("Please choose a table to add to before submitting");
+                pane.setContent(text);
+                clearTextFields();
+                currentState = 0;
+                break;
+        }
+        return textInputs;
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         Statement conn = OracleCon.connectDB();
     }
-
 
 }

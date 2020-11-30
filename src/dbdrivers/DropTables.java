@@ -2,8 +2,12 @@ package dbdrivers;
 
 import java.sql.Statement;
 
+/**
+ * Drops all tables within the database
+ */
 public class DropTables {
     public String boxString = "";
+    // Array of strings of DROP commands to be executed within a loop.
     String[] dropCommands = {
             "DROP TABLE located_in",
             "DROP TABLE hospital",
@@ -25,9 +29,15 @@ public class DropTables {
             "DROP VIEW high_cost_surgeries",
             "DROP VIEW new_pharmacists"
     };
+
+    /**
+     * Executes drop commands and displays the output/status to the user by looping through the dropCommands array.
+     */
     public void drop(){
         boxString = "";
+        // Connect to OracleDB
         Statement conn = OracleCon.connectDB();
+        // Execute each dropCommand and display output to the user.
         for (String command : dropCommands) {
             try {
                 assert conn != null;

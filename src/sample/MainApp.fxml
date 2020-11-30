@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sample.MainAppController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainAppController">
     <children>
         <HBox layoutX="14.0" layoutY="10.0" prefHeight="639.0" prefWidth="973.0">
             <children>
@@ -13,7 +13,7 @@
                                 <VBox prefHeight="145.0" prefWidth="370.0">
                                     <children>
                                         <Button fx:id="testConnection" mnemonicParsing="false" onAction="#testConnectionButton" prefHeight="39.0" prefWidth="377.0" text="Test Connection" />
-                                        <Button fx:id="createTables" mnemonicParsing="false" onAction="#createTablesButton" prefHeight="39.0" prefWidth="374.0" text="Create Tables" />
+                                        <Button fx:id="createTables" mnemonicParsing="false" onAction="#createTablesButton" prefHeight="39.0" prefWidth="374.0" text="Create Tables and Views" />
                                         <Button fx:id="populateTables" mnemonicParsing="false" onAction="#populateTablesButton" prefHeight="39.0" prefWidth="380.0" text="Populate Tables" />
                                     </children>
                                 </VBox>
@@ -67,24 +67,42 @@
                 </VBox>
                 <VBox prefHeight="581.0" prefWidth="236.0">
                     <children>
-                        <Button fx:id="addPatient" mnemonicParsing="false" onAction="#addPatientButton" prefHeight="39.0" prefWidth="244.0" text="Add Patient" />
-                        <Button fx:id="addPhysician" mnemonicParsing="false" onAction="#addPhysicianButton" prefHeight="39.0" prefWidth="248.0" text="Add Physican " />
-                        <Button fx:id="addNurse" mnemonicParsing="false" onAction="#addNurseButton" prefHeight="39.0" prefWidth="238.0" text="Add Nurse" />
-                        <Button fx:id="addPharmacist" mnemonicParsing="false" onAction="#addPharmacistButton" prefHeight="39.0" prefWidth="242.0" text="Add Pharmacist" />
-                        <Button fx:id="addAdministrator" mnemonicParsing="false" onAction="#addAdministratorButton" prefHeight="39.0" prefWidth="249.0" text="Add Administrator" />
-                        <Button fx:id="addSurgery" mnemonicParsing="false" onAction="#addSurgeryButton" prefHeight="39.0" prefWidth="249.0" text="Add Surgery " />
-                        <Button fx:id="addHospital" mnemonicParsing="false" onAction="#addHospitalButton" prefHeight="39.0" prefWidth="247.0" text="Add Hospital" />
-                        <Button fx:id="addPatientRoom" mnemonicParsing="false" onAction="#addPatientRoomButton" prefHeight="39.0" prefWidth="251.0" text="Add Patient Room" />
-                        <Button fx:id="addOperatingRoom" mnemonicParsing="false" onAction="#addOperatingRoomButton" prefHeight="39.0" prefWidth="283.0" text="Add Operating Room" />
-                        <Button fx:id="addMedicalBill" mnemonicParsing="false" onAction="#addMedicalBillButton" prefHeight="39.0" prefWidth="259.0" text="Add Medical Bill" />
-                        <Button fx:id="addEmergContact" mnemonicParsing="false" onAction="#addEmergContactButton" prefHeight="39.0" prefWidth="256.0" text="Add Emerg. Contact" />
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                            <children>
-                                <HBox prefHeight="35.0" prefWidth="235.0" />
-                                <Button fx:id="submitData" mnemonicParsing="false" onAction="#submitDataButton" prefHeight="39.0" prefWidth="241.0" text="Submit Data" />
-                                <Button fx:id="exitApplication" mnemonicParsing="false" onAction="#exitApplicationButton" prefHeight="39.0" prefWidth="248.0" text="Exit Application" />
-                            </children>
+                        <Button fx:id="addPatient" mnemonicParsing="false" onAction="#patientButton" prefHeight="30.0" prefWidth="244.0" text="Patient" />
+                        <Button fx:id="addPhysician" mnemonicParsing="false" onAction="#physicianButton" prefHeight="30.0" prefWidth="248.0" text="Physican " />
+                        <Button fx:id="addNurse" mnemonicParsing="false" onAction="#nurseButton" prefHeight="30.0" prefWidth="238.0" text="Nurse" />
+                        <Button fx:id="addPharmacist" mnemonicParsing="false" onAction="#pharmacistButton" prefHeight="30.0" prefWidth="242.0" text="Pharmacist" />
+                        <Button fx:id="addAdministrator" mnemonicParsing="false" onAction="#administratorButton" prefHeight="30.0" prefWidth="249.0" text="Administrator" />
+                        <Button fx:id="addSurgery" mnemonicParsing="false" onAction="#surgeryButton" prefHeight="30.0" prefWidth="249.0" text="Surgery " />
+                        <Button fx:id="addHospital" mnemonicParsing="false" onAction="#hospitalButton" prefHeight="30.0" prefWidth="247.0" text="Hospital" />
+                        <Button fx:id="addPatientRoom" mnemonicParsing="false" onAction="#patientRoomButton" prefHeight="30.0" prefWidth="251.0" text="Patient Room" />
+                        <Button fx:id="addOperatingRoom" mnemonicParsing="false" onAction="#operatingRoomButton" prefHeight="30.0" prefWidth="283.0" text="Operating Room" />
+                        <Button fx:id="addMedicalBill" mnemonicParsing="false" onAction="#medicalBillButton" prefHeight="30.0" prefWidth="259.0" text="Medical Bill" />
+                        <Button fx:id="addEmergContact" mnemonicParsing="false" onAction="#emergContactButton" prefHeight="30.0" prefWidth="256.0" text="Emerg. Contact" />
+                  <Button fx:id="writesPrescription" mnemonicParsing="false" onAction="#writesPrescriptionButton" prefHeight="30.0" prefWidth="249.0" text="Wrties Prescription Relationship" />
+                  <Button fx:id="treatedBy" mnemonicParsing="false" onAction="#treatedByButton" prefHeight="30.0" prefWidth="249.0" text="Treated By Relationship" />
+                  <Button fx:id="preforms" mnemonicParsing="false" onAction="#preformsButton" prefHeight="30.0" prefWidth="249.0" text="Preforms Relationship" />
+                  <Button fx:id="assists" mnemonicParsing="false" onAction="#assistsButton" prefHeight="30.0" prefWidth="249.0" text="Assists Relationship" />
+                  <Button fx:id="locatedIn" mnemonicParsing="false" onAction="#locatedInButton" prefHeight="30.0" prefWidth="249.0" text="Located In Relationship" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Separator orientation="VERTICAL" prefHeight="20.0" />
+                        <HBox prefHeight="55.0" prefWidth="235.0">
+                           <children>
+                              <Button fx:id="delete" mnemonicParsing="false" onAction="#deleteButton" text="Delete" />
+                              <Separator prefWidth="10.0" />
+                              <Button fx:id="update" mnemonicParsing="false" onAction="#updateButton" text="Update" />
+                              <Button fx:id="submit" mnemonicParsing="false" onAction="#submitButton" text="Submit" />
+                              <Separator prefWidth="10.0" />
+                              <Button fx:id="search" mnemonicParsing="false" onAction="#searchButton" text="Search" />
+                           </children>
+                        </HBox>
+                        <VBox prefHeight="110.0" prefWidth="235.0">
+                           <children>
+                              <Button fx:id="exitApplication" mnemonicParsing="false" onAction="#exitApplicationButton" prefHeight="25.0" prefWidth="249.0" text="Exit Application" />
+                           </children>
                         </VBox>
+                     </children>
+                  </VBox>
                     </children>
                 </VBox>
             </children>

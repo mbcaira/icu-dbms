@@ -3,9 +3,12 @@ package dbdrivers;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
-
+/**
+ * Runs advanced SQL queries on the OracleDB.
+ */
 public class AdvancedQueries {
     public String boxString = "";
+    // Store queries as an array of string to loop through.
     String[] queries;
     {
         queries = new String[]{
@@ -47,7 +50,12 @@ public class AdvancedQueries {
         };
     }
 
+    /**
+     * Reads queries from the array of strings and runs a for loop to execute each of them after connecting to the
+     * database. Sends the results of the queries to boxString to be displayed.
+     */
     public void advancedQueries() {
+        // Connect to OracleDB
         Statement conn = OracleCon.connectDB();
         boxString = "";
         for (String command : queries) {
@@ -55,9 +63,10 @@ public class AdvancedQueries {
                 assert conn != null;
                 ResultSet rs = conn.executeQuery(command);
                 System.out.println("Executed: "+command);
+                boxString += ("Executed: " + command); // Show which command was executed to the user
                 ResultSetMetaData rsmd = rs.getMetaData();
                 int columnNumber = rsmd.getColumnCount();
-                while (rs.next()) {
+                while (rs.next()) {    //Loop through result set and print out each string
                     for (int i = 1; i <= columnNumber; i++) {
                         String columnValue = rs.getString(i);
                         boxString += columnValue+" ";
@@ -65,7 +74,7 @@ public class AdvancedQueries {
                     boxString += "\n";
                 }
             } catch (Exception e) {
-                System.out.println("Failed to execute: "+command+"\n"+e);
+                System.out.println("Failed to execute: "+command+"\n"+e); //Catch all exceptions, inform user.
                 boxString += "Failed to execute: "+command+"\n"+e;
             }
         }

@@ -2,8 +2,12 @@ package dbdrivers;
 
 import java.sql.Statement;
 
+/**
+ * Creates all the tables required on OracleDB.
+ */
 public class CreateTables {
     public String boxString = "";
+    // Store the create commands as an array of strings that can be looped through.
     String[] createCommands = {
             ("CREATE TABLE administrator(\n" +
                     "    admin_id INT PRIMARY KEY,\n" +
@@ -141,8 +145,14 @@ public class CreateTables {
                     "FROM pharmacist\n" +
                     "WHERE prescriptions_filled<100\n")
     };
+
+    /**
+     * Executes the create table commands on the OracleDB by looping through the createCommands array.
+     */
     public void create(){
+        // Connect to OracleDB
         Statement conn = OracleCon.connectDB();
+        // Display result of command execution to user.
         for (String command : createCommands) {
             try {
                 assert conn != null;

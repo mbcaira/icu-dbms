@@ -2,8 +2,12 @@ package dbdrivers;
 
 import java.sql.Statement;
 
+/**
+ * Populates the tables of the database with pre-specified INSERT commands.
+ */
 public class PopulateTables {
     public String boxString = "";
+    // Array of insert commands to index through later on.
     String[] populateCommands = {
             ("INSERT INTO administrator VALUES(51,'Joe','Swanson')\n"),
             ("INSERT INTO administrator VALUES(52,'Donna','Paulson')\n"),
@@ -58,9 +62,15 @@ public class PopulateTables {
             ("INSERT INTO hospital VALUES(0,'33 University','Sick Kids Hospital')\n"),
             ("INSERT INTO located_in VALUES(0,3,56,51,901,20)\n")
     };
+
+    /**
+     * Populates the database tables by indexing through the populateCommands array and executing each entry.
+     */
     public void populate(){
+        // Connect to the database.
         Statement conn = OracleCon.connectDB();
         boxString = "";
+        // Execute each INSERT statement and display the result to the user
         for (String command : populateCommands) {
             try {
                 assert conn != null;

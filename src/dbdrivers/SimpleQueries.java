@@ -4,8 +4,12 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
+/**
+ * Execute simple queries that are pre-specified
+ */
 public class SimpleQueries {
     public String boxString = "";
+    // Array of strings of queries to be executed within a loop
     String[] queries;
     {
         queries = new String[]{
@@ -63,9 +67,14 @@ public class SimpleQueries {
         };
     }
 
+    /**
+     * Executes each query within the queries array and displays output.
+     */
     public void queries() {
+        // Connect to OracleDB
         Statement conn = OracleCon.connectDB();
         boxString = "";
+        // Execute each statement in the queries array and display output to user.
         for (String command : queries) {
             try {
                 assert conn != null;
