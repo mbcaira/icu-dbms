@@ -1,4 +1,4 @@
-package sample;
+package gui;
 
 import dbdrivers.*;
 import javafx.application.Platform;
