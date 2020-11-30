@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="icu-dbms">
+    <output-path>$PROJECT_DIR$/out/artifacts/icu_dbms</output-path>
+    <root id="root">
+      <element id="archive" name="icu_dbms.jar">
+        <element id="module-output" name="icu-dbms" />
+      </element>
+    </root>
+  </artifact>
+</component>

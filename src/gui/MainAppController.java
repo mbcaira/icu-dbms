@@ -1,4 +1,4 @@
-package gui;
+package sample;
 
 import dbdrivers.*;
 import javafx.application.Platform;
@@ -126,9 +126,8 @@ public class MainAppController implements Initializable {
     void administratorButton (ActionEvent event){
         currentState = 1;
         text.setText("To DELETE an Administrator: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD an Administrator: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing administrator: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Administrator: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button \nTo UPDATE an existing administrator: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Administrator: enter the data constraints you would like to search, then click the search button");
         label1.setText("Administrator ID:");
         label2.setText("First Name:");
         label3.setText("Last Name:");
@@ -146,9 +145,8 @@ public class MainAppController implements Initializable {
     void assistsButton (ActionEvent event){
         currentState = 2;
         text.setText("To DELETE an Assists Relationship: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD an Assists Relationship: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Assists Relationship: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Assists Relationship: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button  \nTo UPDATE an existing Assists Relationship: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Assists Relationship: enter the data constraints you would like to search, then click the search button");
         label1.setText("Nurse ID:");
         label2.setText("Operation ID:");
         label3.setText("");
@@ -166,9 +164,8 @@ public class MainAppController implements Initializable {
     void emergContactButton (ActionEvent event){
         currentState = 3;
         text.setText("To DELETE a Contact: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD an Contact: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Contact: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Emergency Contact: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button  \nTo UPDATE an existing Contact: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Emergency Contact: enter the data constraints you would like to search, then click the search button");
         label1.setText("Patient ID:");
         label2.setText("Phone Number:");
         label3.setText("First Name:");
@@ -186,9 +183,8 @@ public class MainAppController implements Initializable {
     void hospitalButton (ActionEvent event){
         currentState = 4;
         text.setText("To DELETE a Hospital: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD a Hospital: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Hospital: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Hospital: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button  \nTo UPDATE an existing Hospital: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Hospital: enter the data constraints you would like to search, then click the search button");
         label1.setText("Hospital ID:");
         label2.setText("Address:");
         label3.setText("Name:");
@@ -206,9 +202,8 @@ public class MainAppController implements Initializable {
     void locatedInButton (ActionEvent event){
         currentState = 5;
         text.setText("To DELETE a Located In Relationship: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD a Located In Relationship: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Located In Relationship: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Located In Relationship: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button \nTo UPDATE an existing Located In Relationship: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Located In Relationship: enter the data constraints you would like to search, then click the search button");
         label1.setText("Hospital ID:");
         label2.setText("Medical ID:");
         label3.setText("Patient Room:");
@@ -226,9 +221,8 @@ public class MainAppController implements Initializable {
     void medicalBillButton (ActionEvent event){
         currentState = 6;
         text.setText("To DELETE a Medical Bill: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD a Medical Bill: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Medical Bill: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Medical Bill: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button \nTo UPDATE an existing Medical Bill: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Medical Bill: enter the data constraints you would like to search, then click the search button");
         label1.setText("Patient ID:");
         label2.setText("Bill ID:");
         label3.setText("Total Cost:");
@@ -246,9 +240,8 @@ public class MainAppController implements Initializable {
     void nurseButton (ActionEvent event){
         currentState = 7;
         text.setText("To DELETE a Nurse: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD an Administrator Nurse: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Nurse: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Nurse: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button \nTo UPDATE an existing Nurse: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Nurse: enter the data constraints you would like to search, then click the search button");
         label1.setText("Physician ID:");
         label2.setText("First Name:");
         label3.setText("Last Name:");
@@ -266,9 +259,8 @@ public class MainAppController implements Initializable {
     void operatingRoomButton (ActionEvent event){
         currentState = 8;
         text.setText("To DELETE an Operating Room: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD an Operating Room: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Operating Room: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Operating Room: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button \nTo UPDATE an existing Operating Room: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Operating Room: enter the data constraints you would like to search, then click the search button");
         label1.setText("Room Number:");
         label2.setText("Specialty:");
         label3.setText("");
@@ -286,9 +278,8 @@ public class MainAppController implements Initializable {
     void patientButton (ActionEvent event){
         currentState = 9;
         text.setText("To DELETE a Patient: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD a Patient: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Patient: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Patient: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button \nTo UPDATE an existing Patient: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Patient: enter the data constraints you would like to search, then click the search button");
         label1.setText("Patient ID:");
         label2.setText("First Name:");
         label3.setText("Last Name:");
@@ -306,9 +297,8 @@ public class MainAppController implements Initializable {
     void patientRoomButton (ActionEvent event){
         currentState = 10;
         text.setText("To DELETE a Patient Room: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD a Patient Room: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Patient Room: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Patient Room: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button \nTo UPDATE an existing Patient Room: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Patient Room: enter the data constraints you would like to search, then click the search button");
         label1.setText("Room Number:");
         label2.setText("");
         label3.setText("");
@@ -326,9 +316,8 @@ public class MainAppController implements Initializable {
     void preformsButton (ActionEvent event){
         currentState = 11;
         text.setText("To DELETE a Performs Relationship: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD a Performs Relationship: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Performs Relationship: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Performs Relationship: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button \nTo UPDATE an existing Performs Relationship: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Performs Relationship: enter the data constraints you would like to search, then click the search button");
         label1.setText("Physician ID:");
         label2.setText("Lead Physician:");
         label3.setText("Operation ID:");
@@ -346,9 +335,8 @@ public class MainAppController implements Initializable {
     void pharmacistButton (ActionEvent event){
         currentState = 12;
         text.setText("To DELETE a Pharmacist: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD a Pharmacist: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Pharmacist: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Pharmacist: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button \nTo UPDATE an existing Pharmacist: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Pharmacist: enter the data constraints you would like to search, then click the search button");
         label1.setText("Pharmacist ID:");
         label2.setText("First Name:");
         label3.setText("Last Name:");
@@ -366,9 +354,8 @@ public class MainAppController implements Initializable {
     void physicianButton (ActionEvent event){
         currentState = 13;
         text.setText("To DELETE a Physician: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD a Physician: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Physician: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Physician: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button \nTo UPDATE an existing Physician: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Physician: enter the data constraints you would like to search, then click the search button");
         label1.setText("Physician ID:");
         label2.setText("First Name:");
         label3.setText("Last Name:");
@@ -386,9 +373,8 @@ public class MainAppController implements Initializable {
     void surgeryButton (ActionEvent event) {
         currentState = 14;
         text.setText("To DELETE a Surgery: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD a Surgery: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Surgery: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Surgery: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button \nTo UPDATE an existing Surgery: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Surgery: enter the data constraints you would like to search, then click the search button");
         label1.setText("Patient ID:");
         label2.setText("Operation ID:");
         label3.setText("Operation Type:");
@@ -406,9 +392,8 @@ public class MainAppController implements Initializable {
     void treatedByButton (ActionEvent event){
         currentState = 15;
         text.setText("To DELETE a Treated By Relationship: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD a Treated By Relationship: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Treated By Relationship: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Treated By Relationship: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button \nTo UPDATE an existing Treated By Relationship: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Treated By Relationship: enter the data constraints you would like to search, then click the search button");
         label1.setText("Patient ID:");
         label2.setText("Physician ID:");
         label3.setText("Nurse ID:");
@@ -426,9 +411,8 @@ public class MainAppController implements Initializable {
     void writesPrescriptionButton (ActionEvent event){
         currentState = 16;
         text.setText("To DELETE a Writes Prescription Relationship: Enter one or many fields referencing the data you would like to " +
-                "delete, then click the delete button \nTo ADD a Writes Prescription Relationship: Fill all empty text fields with " +
-                "relevant data, and click the add button \nTo UPDATE an existing Writes Prescription Relationship: enter the data you would like to change, then click the update button" +
-                "\nTo Search an existing Writes Prescription Relationship: enter the data constraints you would like to search, then click the search button");
+                "delete, then click the delete button \nTo UPDATE an existing Writes Prescription Relationship: enter the data you would like to change, then click the update button" +
+                "\nTo SEARCH an existing Writes Prescription Relationship: enter the data constraints you would like to search, then click the search button");
         label1.setText("Physician ID:");
         label2.setText("Pharmacist ID:");
         label3.setText("");
